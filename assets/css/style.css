@@ -5,16 +5,17 @@ body {
     min-height: 120vh;
 }
 
-.game-container{
-    display: flex;
-    justify-content: center;
+
+#instructions{
+    visibility: hidden;
+    position: absolute;
 }
 
 #gameBoard {
-    width: 422px;
+    width: 322px;
     display: grid;
-    grid-template-columns: repeat(10, 40px);
-    grid-template-rows: repeat(20, 40px);
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(21, 30px);
     grid-gap: 2px;
     background-color: greenyellow;
     border: 2px solid greenyellow;
@@ -23,4 +24,23 @@ body {
 
 .cell {
     background-color: black;
+}
+
+.bottom-row{
+    visibility: hidden;
+}
+
+#score-board{
+    color: white;
+}
+
+.score{
+    color: maroon;
+}
+
+@media screen and (min-width: 480) {
+    #gameBoard{
+        grid-template-columns: repeat(10, 35px);
+    grid-template-rows: repeat(21, 35px);
+    }
 }
