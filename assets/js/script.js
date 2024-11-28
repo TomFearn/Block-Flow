@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function(){
         //setup board function called
         run = true;
         setupBoard();
-        spawnBlock();
+        drawBlock();
         runGame();
     });
 })
@@ -118,7 +118,7 @@ function setupBoard() {
 function restart() {
     //call setupBoard and runGame
     setupBoard();
-    spawnBlock();
+    drawBlock();
     runGame();
     toggleGameOverMessage();
 }
@@ -140,229 +140,9 @@ function decreaseTimer() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Variables
-const width = 10;
+const width = 10; // Number of columns in the grid
+const height = 20; // Number of rows in the grid
 let squares = [];
 let currentPosition = 4;
 let currentRotation = 0;
@@ -465,7 +245,11 @@ function moveDown() {
     undrawBlock();
     currentPosition += width;
     drawBlock();
-    freeze();
+    if (freeze()) {
+        // Check for filled rows and update the score
+        checkFilledRow();
+        updateScore();
+    }
 }
 
 /** 
@@ -502,7 +286,10 @@ function moveRight() {
  * Spawns a new Tetromino and resets the current position.
  */
 function freeze() {
-    if (current.some((row, rowIndex) => row.some((cell, cellIndex) => cell === 1 && squares[currentPosition + rowIndex * width + cellIndex + width].classList.contains('taken')))) {
+    if (current.some((row, rowIndex) => row.some((cell, cellIndex) => {
+        const index = currentPosition + rowIndex * width + cellIndex + width;
+        return cell === 1 && (index >= squares.length || squares[index].classList.contains('taken'));
+    }))) {
         current.forEach((row, rowIndex) => row.forEach((cell, cellIndex) => {
             if (cell === 1) {
                 squares[currentPosition + rowIndex * width + cellIndex].classList.add('taken');
@@ -512,8 +299,10 @@ function freeze() {
         random = Math.floor(Math.random() * tetrominoes.length);
         current = tetrominoes[random];
         currentPosition = 4;
-        draw();
+        drawBlock();
+        return true;
     }
+    return false;
 }
 
 // Control the Tetromino
@@ -531,15 +320,18 @@ function control(e) {
 
 document.addEventListener('keydown', control);
 
-drawBlock();
 
 
-stopBlock()
 
+/**Checks for end of game */
+function checkGameOver() {
+    return false;
+} 
 
-checkGameOver() 
-
-
+/**
+ * 
+ * returns false
+ */
 function endGame() {
     return false;
 }
@@ -559,318 +351,8 @@ function endGame() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let playerScore
-let highScore
+let playerScore;
+let highScore;
 
 
 function displayScore(){
@@ -881,13 +363,13 @@ function checkHighScore(){
     if (playerScore > highScore){
         highScore = playerScore
     } else{
-        return
+        return false;
     }
 }
 
 
-function checkFilledRow(){
-    
+function checkFilledRow() {
+
 }
 
 
@@ -897,271 +379,14 @@ function clearRow(){
 
 
 function updateScore(){
-    ++playerScore
+    decreaseTimer();
 }
 
 //could have
 
-rotateBlock()
+function rotateBlock() {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 
@@ -1196,17 +421,16 @@ function toggleGameOverMessage() {
  * The main game loop function. Uses a setTimeout to call itself every tick.
  */
 function runGame() {
+    console.log('running');
     if (run === true) {
 
         moveDown();
         
-        if (checkCollison()) {
-            stopBlock();
-            checkFilledRow(); // all the flled rows and board would be adjusted here
+        if (freeze()) {
+            //checkFilledRow(); // all the flled rows and board would be adjusted here
             if (checkGameOver()) {
                 run = endGame();
             } else {
-                spawnBlock();
                 setTimeout(runGame, timer);
             }
         } else {
