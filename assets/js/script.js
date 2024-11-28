@@ -3,7 +3,7 @@ for (let i = 0; i < 200; i++) {
     const cell = document.createElement('div');
     cell.classList.add('cell');
     grid.appendChild(cell);
-    
+
 }
 
 //Variables
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function(){
         runGame();
     });
 })
-    
+
 /**
 
  * Clears the board and resets the game.
@@ -42,7 +42,7 @@ function restart() {
 
 let timer = 300;
 const multiplier = 0.96;
-    
+
 /**
  * Decrease the timer by 4%. Time is rounded to the nearest whole number.
  * Time is in milliseconds.
@@ -203,9 +203,9 @@ function moveRight() {
  */
 function freeze() {
     if (current.some((row, rowIndex) => row.some((cell, cellIndex) => {
-        const index = currentPosition + rowIndex * width + cellIndex + width;
-        return cell === 1 && (index >= squares.length || squares[index].classList.contains('taken'));
-    }))) {
+            const index = currentPosition + rowIndex * width + cellIndex + width;
+            return cell === 1 && (index >= squares.length || squares[index].classList.contains('taken'));
+        }))) {
         current.forEach((row, rowIndex) => row.forEach((cell, cellIndex) => {
             if (cell === 1) {
                 squares[currentPosition + rowIndex * width + cellIndex].classList.add('taken');
@@ -242,7 +242,7 @@ document.addEventListener('keydown', control);
 /**Checks for end of game */
 function checkGameOver() {
     return false;
-} 
+}
 
 /**
  * 
@@ -265,14 +265,14 @@ let highScore;
 /**
  * displays the player score
  */
-function displayScore(){
+function displayScore() {
     document.querySelector(".player-score").value = playerScore
 }
 
-function checkHighScore(){
-    if (playerScore > highScore){
+function checkHighScore() {
+    if (playerScore > highScore) {
         highScore = playerScore
-    } else{
+    } else {
         return false;
     }
 }
@@ -283,12 +283,12 @@ function checkFilledRow() {
 }
 
 
-function clearRow(){
+function clearRow() {
 
 }
 
 
-function updateScore(){
+function updateScore() {
     decreaseTimer();
 }
 
@@ -338,17 +338,19 @@ function runGame() {
     if (run === true) {
 
         moveDown();
-        
-        if (freeze()) {
-            //checkFilledRow(); // all the flled rows and board would be adjusted here
-            if (checkGameOver()) {
-                run = endGame();
+        setTimeout(() => {
+            if (freeze()) {
+                //checkFilledRow(); // all the flled rows and board would be adjusted here
+                if (checkGameOver()) {
+                    run = endGame();
+                } else {
+                    setTimeout(runGame, timer);
+                }
             } else {
                 setTimeout(runGame, timer);
             }
-        } else {
-            setTimeout(runGame, timer);
-        }
+        }, 100)
+
     } else if (run === false) {
         toggleGameOverMessage();
     }
