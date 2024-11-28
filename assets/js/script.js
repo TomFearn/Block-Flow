@@ -483,8 +483,18 @@ function moveLeft() {
 }
 
 
-moveRight()
-
+/** 
+ * Move the Tetromino right, unless at the edge or there is a blockage
+ * */
+function moveRight() {
+    undrawBlock();
+    const isAtRightEdge = current.some((row, rowIndex) => row.some((cell, cellIndex) => cell === 1 && (currentPosition + rowIndex * width + cellIndex) % width === width - 1));
+    if (!isAtRightEdge) currentPosition += 1;
+    if (current.some((row, rowIndex) => row.some((cell, cellIndex) => cell === 1 && squares[currentPosition + rowIndex * width + cellIndex].classList.contains('taken')))) {
+        currentPosition -= 1;
+    }
+    drawBlock();
+}
 
 
 /**
