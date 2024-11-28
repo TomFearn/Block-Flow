@@ -463,9 +463,9 @@ spawnBlock();
  * Move the block down by one row
  * */
 function moveDown() {
-    undraw();
+    undrawBlock();
     currentPosition += width;
-    draw();
+    drawBlock();
     freeze();
 }
 
@@ -475,7 +475,27 @@ moveLeft()
 moveRight()
 
 
-checkCollison()
+
+/**
+ * Freezes the current Tetromino in place if it has collided with a taken cell.
+ * Adds the 'taken' class to the cells occupied by the Tetromino.
+ * Spawns a new Tetromino and resets the current position.
+ */
+function freeze() {
+    if (current.some((row, rowIndex) => row.some((cell, cellIndex) => cell === 1 && squares[currentPosition + rowIndex * width + cellIndex + width].classList.contains('taken')))) {
+        current.forEach((row, rowIndex) => row.forEach((cell, cellIndex) => {
+            if (cell === 1) {
+                squares[currentPosition + rowIndex * width + cellIndex].classList.add('taken');
+            }
+        }));
+        // Start a new Tetromino falling
+        spawnBlock();
+        currentPosition = 4;
+        draw();
+    }
+}
+
+
 
 
 stopBlock()
