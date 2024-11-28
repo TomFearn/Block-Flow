@@ -98,7 +98,12 @@ for (let i = 0; i < 200; i++) {
 
 document.addEventListener('DOMContentLoaded', function(){
     //event listener for start button. runGame called upn click
-    //setup board function called
+    document.getElementById('resetButton').addEventListener('click', function() {
+        //setup board function called
+        setupBoard();
+        spawnBlock();
+        runGame();
+    });
 })
     
 /**
@@ -106,13 +111,22 @@ document.addEventListener('DOMContentLoaded', function(){
  * Clears the board and resets the game.
 
  */
-setupBoard()
-    //clear board
+function setupBoard() {
+    //clears the board and resets the game
+    const gameBoard = Array.from({ length: 20 }, () => Array(10).fill(0));
+    console.table(gameBoard);
+    // set position to top of the grid
+    playerX = 0;
+    playerY = 0;
+}
 
-
-
-restart()
+function restart() {
     //call setupBoard and runGame
+    setupBoard();
+    spawnBlock();
+    runGame();
+    toggleGameOverMessage();
+}
 
 
 let timer = 300;
@@ -1032,15 +1046,17 @@ function runGame() {
         
         if (checkCollison()) {
             stopBlock();
-            checkFilledRow();
+            checkFilledRow(); // all the flled rows and board would be adjusted here
             if (checkGameOver()) {
                 run = endGame();
             } else {
                 spawnBlock();
+                setTimeout(runGame, timer);
             }
+        } else {
+            setTimeout(runGame, timer);
         }
-        setTimeout(runGame, timer);
-    } else {
-        console.log()
+    } else if (run === false) {
+        toggleGameOverMessage();
     }
 }
