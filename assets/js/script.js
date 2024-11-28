@@ -361,18 +361,83 @@ function decreaseTimer() {
 
 
 
+// Variables
+const width = 10;
+let squares = [];
+let currentPosition = 4;
+let currentRotation = 0;
 
+// Define Tetromino shapes
+const tetrominoes = [
+    // L-Tetromino
+    [
+        [1, 1, 1, 0],
+        [1, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ],
+    // Z-Tetromino
+    [
+        [1, 1, 0, 0],
+        [0, 1, 1, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ],
+    // T-Tetromino
+    [
+        [0, 1, 0, 0],
+        [1, 1, 1, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ],
+    // O-Tetromino
+    [
+        [1, 1, 0, 0],
+        [1, 1, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ],
+    // I-Tetromino
+    [
+        [1, 1, 1, 1],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ],
+    // S-Tetromino
+    [
+        [0, 1, 1, 0],
+        [1, 1, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ],
+    // J-Tetromino
+    [
+        [1, 1, 1, 0],
+        [0, 0, 1, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ]
+];
 
-
-
-
-
-
+squares = Array.from(grid.querySelectorAll('.cell'));
 
 /** 
  * Randomly generates the new block from pre-defined blocks 
  * */
-spawnBlock()
+function spawnBlock() {
+    let random = Math.floor(Math.random() * tetrominoes.length);
+    let current = tetrominoes[random];
+    current.forEach((row, rowIndex) => {
+        row.forEach((cell, cellIndex) => {
+            if (cell === 1) {
+                squares[currentPosition + rowIndex * width + cellIndex].classList.add('tetromino');
+            }
+        });
+    });
+}
+
+spawnBlock();
 
 
 moveDown()

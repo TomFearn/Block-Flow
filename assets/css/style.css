@@ -26,8 +26,9 @@ body {
     background-color: black;
 }
 
-
-
+.tetromino {
+    background-color: red !important ;
+}
 
 
 
