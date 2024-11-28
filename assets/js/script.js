@@ -341,13 +341,11 @@ restart()
 
 
 
-
-
-
-
-
-
-
+// Variables
+const width = 10;
+let squares = [];
+let currentPosition = 4;
+let currentRotation = 0;
 
 // Define Tetromino shapes
 const tetrominoes = [
