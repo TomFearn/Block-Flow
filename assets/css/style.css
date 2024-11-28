@@ -25,3 +25,12 @@ body {
 .cell {
     background-color: black;
 }
+
+#score-board{
+    color: white;
+}
+
+.score{
+    color: maroon;
+
+}
