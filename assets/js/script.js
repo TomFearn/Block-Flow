@@ -516,7 +516,20 @@ function freeze() {
     }
 }
 
+// Control the Tetromino
+function control(e) {
+    if (e.keyCode === 65) {
+        moveLeft();
+    } else if (e.keyCode === 87) {
+        rotate();
+    } else if (e.keyCode === 68) {
+        moveRight();
+    } else if (e.keyCode === 83) {
+        moveDown();
+    }
+}
 
+document.addEventListener('keydown', control);
 
 
 stopBlock()
