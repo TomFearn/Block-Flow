@@ -26,6 +26,23 @@ body {
     background-color: black;
 }
 
+
+
+
+
+
+
+
+
+
+.gameover-on {
+    z-index: 1;
+}
+
+.gameover-off {
+    z-index: -1;
+}
+
 .bottom-row{
     visibility: hidden;
 }
