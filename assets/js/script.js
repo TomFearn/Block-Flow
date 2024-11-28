@@ -10,91 +10,6 @@ for (let i = 0; i < 200; i++) {
 let run;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //Functions
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -344,18 +259,12 @@ function endGame() {
 
 
 
-
-
-
-
-
-
-
-
 let playerScore;
 let highScore;
 
-
+/**
+ * displays the player score
+ */
 function displayScore(){
     document.querySelector(".player-score").value = playerScore
 }
@@ -402,10 +311,13 @@ function rotateBlock() {
 function toggleGameOverMessage() {
     //game over message
     let gameOver = document.getElementById('gameOverMessage');
-    if (gameOver.classList.contains('gamever-off')) {
+    if (gameOver.classList.contains('gameover-off')) {
+
         gameOver.classList.add('gameover-on');
         gameOver.classList.remove('gameover-off');
+
     } else {
+
         gameOver.classList.add('gameover-off');
         gameOver.classList.remove('gameover-on');
     }
