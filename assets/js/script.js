@@ -6,7 +6,7 @@ for (let i = 0; i < 200; i++) {
 }
 
 //Variables
-
+let run;
 
 
 
@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function(){
     //event listener for start button. runGame called upn click
     document.getElementById('resetButton').addEventListener('click', function() {
         //setup board function called
+        run = true;
         setupBoard();
         spawnBlock();
         runGame();
