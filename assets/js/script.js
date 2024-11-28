@@ -113,12 +113,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
  */
 function setupBoard() {
-    //clears the board and resets the game
-    const gameBoard = Array.from({ length: 20 }, () => Array(10).fill(0));
-    console.table(gameBoard);
-    // set position to top of the grid
-    playerX = 0;
-    playerY = 0;
 }
 
 function restart() {
