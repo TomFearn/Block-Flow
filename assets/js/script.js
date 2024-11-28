@@ -425,9 +425,15 @@ squares = Array.from(grid.querySelectorAll('.cell'));
 /** 
  * Randomly generates the new block from pre-defined blocks 
  * */
-function spawnBlock() {
-    let random = Math.floor(Math.random() * tetrominoes.length);
-    let current = tetrominoes[random];
+
+let random = Math.floor(Math.random() * tetrominoes.length);
+let current = tetrominoes[random];
+
+
+/** 
+ * Draw the Tetromino on the board
+ * */
+function drawBlock() {
     current.forEach((row, rowIndex) => {
         row.forEach((cell, cellIndex) => {
             if (cell === 1) {
@@ -437,19 +443,95 @@ function spawnBlock() {
     });
 }
 
-spawnBlock();
+/** 
+ * Undraw the Tetromino on the board
+ * */
+function undrawBlock() {
+    current.forEach((row, rowIndex) => {
+        row.forEach((cell, cellIndex) => {
+            if (cell === 1) {
+                squares[currentPosition + rowIndex * width + cellIndex].classList.remove('tetromino');
+            }
+        });
+    });
+}
 
 
-moveDown()
-    //called every tick
 
-moveLeft()
+/** 
+ * Move the block down by one row
+ * */
+function moveDown() {
+    undrawBlock();
+    currentPosition += width;
+    drawBlock();
+    freeze();
+}
+
+/** 
+ * Move the Tetromino left, unless at the edge or there is a blockage
+ * */
+function moveLeft() {
+    undrawBlock();
+    const isAtLeftEdge = current.some((row, rowIndex) => row.some((cell, cellIndex) => cell === 1 && (currentPosition + rowIndex * width + cellIndex) % width === 0));
+    if (!isAtLeftEdge) currentPosition -= 1;
+    if (current.some((row, rowIndex) => row.some((cell, cellIndex) => cell === 1 && squares[currentPosition + rowIndex * width + cellIndex].classList.contains('taken')))) {
+        currentPosition += 1;
+    }
+    drawBlock();
+}
 
 
-moveRight()
+/** 
+ * Move the Tetromino right, unless at the edge or there is a blockage
+ * */
+function moveRight() {
+    undrawBlock();
+    const isAtRightEdge = current.some((row, rowIndex) => row.some((cell, cellIndex) => cell === 1 && (currentPosition + rowIndex * width + cellIndex) % width === width - 1));
+    if (!isAtRightEdge) currentPosition += 1;
+    if (current.some((row, rowIndex) => row.some((cell, cellIndex) => cell === 1 && squares[currentPosition + rowIndex * width + cellIndex].classList.contains('taken')))) {
+        currentPosition -= 1;
+    }
+    drawBlock();
+}
 
 
-checkCollison()
+/**
+ * Freezes the current Tetromino in place if it has collided with a taken cell.
+ * Adds the 'taken' class to the cells occupied by the Tetromino.
+ * Spawns a new Tetromino and resets the current position.
+ */
+function freeze() {
+    if (current.some((row, rowIndex) => row.some((cell, cellIndex) => cell === 1 && squares[currentPosition + rowIndex * width + cellIndex + width].classList.contains('taken')))) {
+        current.forEach((row, rowIndex) => row.forEach((cell, cellIndex) => {
+            if (cell === 1) {
+                squares[currentPosition + rowIndex * width + cellIndex].classList.add('taken');
+            }
+        }));
+        // Start a new Tetromino falling
+        random = Math.floor(Math.random() * tetrominoes.length);
+        current = tetrominoes[random];
+        currentPosition = 4;
+        draw();
+    }
+}
+
+// Control the Tetromino
+function control(e) {
+    if (e.keyCode === 65) {
+        moveLeft();
+    } else if (e.keyCode === 87) {
+        rotate();
+    } else if (e.keyCode === 68) {
+        moveRight();
+    } else if (e.keyCode === 83) {
+        moveDown();
+    }
+}
+
+document.addEventListener('keydown', control);
+
+drawBlock();
 
 
 stopBlock()
