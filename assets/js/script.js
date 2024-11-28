@@ -341,6 +341,7 @@ restart()
 
 
 
+
 // Variables
 const width = 10;
 let squares = [];
@@ -400,10 +401,24 @@ const tetrominoes = [
     ]
 ];
 
+squares = Array.from(grid.querySelectorAll('.cell'));
+
 /** 
  * Randomly generates the new block from pre-defined blocks 
  * */
-spawnBlock()
+function spawnBlock() {
+    let random = Math.floor(Math.random() * tetrominoes.length);
+    let current = tetrominoes[random];
+    current.forEach((row, rowIndex) => {
+        row.forEach((cell, cellIndex) => {
+            if (cell === 1) {
+                squares[currentPosition + rowIndex * width + cellIndex].classList.add('tetromino');
+            }
+        });
+    });
+}
+
+spawnBlock();
 
 
 moveDown()

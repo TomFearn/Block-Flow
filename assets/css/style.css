@@ -24,3 +24,7 @@ body {
 .cell {
     background-color: black;
 }
+
+.tetromino {
+    background-color: red !important ;
+}
