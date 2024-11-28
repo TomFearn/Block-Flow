@@ -5,16 +5,17 @@ body {
     min-height: 120vh;
 }
 
-.game-container{
-    display: flex;
-    justify-content: center;
+
+#instructions{
+    visibility: hidden;
+    position: absolute;
 }
 
 #gameBoard {
-    width: 422px;
+    width: 322px;
     display: grid;
-    grid-template-columns: repeat(10, 40px);
-    grid-template-rows: repeat(20, 40px);
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(20, 30px);
     grid-gap: 2px;
     background-color: greenyellow;
     border: 2px solid greenyellow;
