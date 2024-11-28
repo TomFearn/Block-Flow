@@ -430,6 +430,9 @@ function newRandomBlock() {
     let current = tetrominoes[random];
 }
 
+/** 
+ * Draw the Tetromino on the board
+ * */
 function drawBlock() {
     current.forEach((row, rowIndex) => {
         row.forEach((cell, cellIndex) => {
@@ -440,6 +443,18 @@ function drawBlock() {
     });
 }
 
+/** 
+ * Undraw the Tetromino on the board
+ * */
+function undrawBlock() {
+    current.forEach((row, rowIndex) => {
+        row.forEach((cell, cellIndex) => {
+            if (cell === 1) {
+                squares[currentPosition + rowIndex * width + cellIndex].classList.remove('tetromino');
+            }
+        });
+    });
+}
 
 spawnBlock();
 
