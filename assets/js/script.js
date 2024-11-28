@@ -1,3 +1,10 @@
+const grid = document.querySelector('#gameBoard');
+for (let i = 0; i < 200; i++) {
+    const cell = document.createElement('div');
+    cell.classList.add('cell');
+    grid.appendChild(cell);
+    
+}
 
 //Variables
 let run;
@@ -107,19 +114,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
  */
 function setupBoard() {
-    for (let i = 0; i < 200; i++) {
-        const cell = document.createElement('div');
-        cell.classList.add('cell');
-        cell.classList.remove('tetromino taken');
-        grid.appendChild(cell);
-        if (i >= 200) {
-            cell.classList.add('taken');
-        }
-    }
-    squares = Array.from(grid.querySelectorAll('.cell'));
 }
-
-setupBoard();
 
 function restart() {
     //call setupBoard and runGame
