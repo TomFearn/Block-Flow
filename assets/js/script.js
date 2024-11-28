@@ -425,10 +425,10 @@ squares = Array.from(grid.querySelectorAll('.cell'));
 /** 
  * Randomly generates the new block from pre-defined blocks 
  * */
-function newRandomBlock() {
-    let random = Math.floor(Math.random() * tetrominoes.length);
-    let current = tetrominoes[random];
-}
+
+let random = Math.floor(Math.random() * tetrominoes.length);
+let current = tetrominoes[random];
+
 
 /** 
  * Draw the Tetromino on the board
@@ -456,7 +456,6 @@ function undrawBlock() {
     });
 }
 
-spawnBlock();
 
 
 /** 
@@ -510,7 +509,8 @@ function freeze() {
             }
         }));
         // Start a new Tetromino falling
-        spawnBlock();
+        random = Math.floor(Math.random() * tetrominoes.length);
+        current = tetrominoes[random];
         currentPosition = 4;
         draw();
     }
@@ -530,6 +530,8 @@ function control(e) {
 }
 
 document.addEventListener('keydown', control);
+
+drawBlock();
 
 
 stopBlock()
