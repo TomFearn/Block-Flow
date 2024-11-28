@@ -722,22 +722,36 @@ function endGame() {
 
 
 
+let playerScore
+let highScore
 
 
+function displayScore(){
+    document.querySelector(".player-score").value = playerScore
+}
 
-displayScore()
+function checkHighScore(){
+    if (playerScore > highScore){
+        highScore = playerScore
+    } else{
+        return
+    }
+}
 
 
-checkHighScore()
+function checkFilledRow(){
+    
+}
 
 
-checkFilledRow()
+function clearRow(){
+
+}
 
 
-clearRow()
-
-
-updateScore()
+function updateScore(){
+    ++playerScore
+}
 
 //could have
 
