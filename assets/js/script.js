@@ -425,9 +425,12 @@ squares = Array.from(grid.querySelectorAll('.cell'));
 /** 
  * Randomly generates the new block from pre-defined blocks 
  * */
-function spawnBlock() {
+function newRandomBlock() {
     let random = Math.floor(Math.random() * tetrominoes.length);
     let current = tetrominoes[random];
+}
+
+function drawBlock() {
     current.forEach((row, rowIndex) => {
         row.forEach((cell, cellIndex) => {
             if (cell === 1) {
@@ -436,6 +439,7 @@ function spawnBlock() {
         });
     });
 }
+
 
 spawnBlock();
 
