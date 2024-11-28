@@ -459,8 +459,15 @@ function undrawBlock() {
 spawnBlock();
 
 
-moveDown()
-    //called every tick
+/** 
+ * Move the block down by one row
+ * */
+function moveDown() {
+    undraw();
+    currentPosition += width;
+    draw();
+    freeze();
+}
 
 moveLeft()
 
