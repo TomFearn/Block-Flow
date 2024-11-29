@@ -2,8 +2,12 @@ const grid = document.querySelector('#gameBoard');
 for (let i = 0; i < 200; i++) {
     const cell = document.createElement('div');
     cell.classList.add('cell');
+    cell.classList.remove('tetromino');
+    cell.classList.remove('taken');
     grid.appendChild(cell);
-    
+    if (i >= 200) {
+        cell.classList.add('taken bottom-row');
+    }
 }
 
 //Variables
@@ -101,8 +105,8 @@ document.addEventListener('DOMContentLoaded', function(){
     //event listener for start button. runGame called upn click
     document.getElementById('resetButton').addEventListener('click', function() {
         //setup board function called
-        run = true;
         setupBoard();
+        run = true;
         drawBlock();
         runGame();
     });
@@ -114,7 +118,19 @@ document.addEventListener('DOMContentLoaded', function(){
 
  */
 function setupBoard() {
+    //clear the board
+    squares.forEach(square => {
+        square.classList.remove('tetromino');
+        square.classList.remove('taken');
+    });
+    //reset the score
+    playerScore = 0;
+    displayScore();
+    //reset the timer
+    timer = 300;
+    run=false
 }
+
 
 function restart() {
     //call setupBoard and runGame
