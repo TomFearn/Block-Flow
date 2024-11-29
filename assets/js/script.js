@@ -366,14 +366,24 @@ function toggleGameOverMessage() {
 
 /**Checks for end of game */
 function checkGameOver() {
+    console.log("Checking for game over...");
+    // Check if any cell in the second row is taken
+    for (let i = width; i < width * 2; i++) {
+        if (squares[i].classList.contains('taken')) {
+            console.log("Game over detected: cell in second row is taken.");
+            return true;
+        }
+    }
     return false;
 }
 
 /**
- * 
- * returns false
+ * Ends the game and returns false.
  */
 function endGame() {
+    console.log("Ending game...");
+    run = false;
+    toggleGameOverMessage();
     return false;
 }
 
