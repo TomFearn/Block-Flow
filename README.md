@@ -2,7 +2,7 @@
 
 #### Try it out here: 
 
-#### Team members:
+#### Team members: [<ins>_Tom Fearn_</ins>](https://github.com/TomFearn)  [<ins>_Jude Woolls_</ins>](https://github.com/judewoolls)  [<ins>_Alex Rodrigues_</ins>](https://github.com/A-SousaRodrigues)
 
 ## Contents
 
@@ -39,10 +39,19 @@ Tetris is a classic arcade game where the player is given randomly selected bloc
 
 ### Our Approach
 
+We chose to use Google meets to conistently check in with eachother throughout the day. We would allocate and decide what parts of the project we should tackle next. We would also make use of sharing the screen with each other when we needed to talk through an issue. This meant that all team members were able to work together and avoid conflicts.  
+
+
 ### Key Successes
+
+We mostly avoided merge conflicts as we set up our project together in a clear structure and by using communication and regularly pulling from the updated main branch to be adding our code to the most up to date version.
+
+We planned well and we had an agreed approach to the project which helped to make the development process easier.
 
 ### Challenges we Faced
 
+#### Minor issues
+- We had used different variable names
 
 ## Project Deployment
 
@@ -61,7 +70,7 @@ We used the GitHub co-pilot extension mainly using the chat window but also the 
 
 We used AI for debugging adn to explain any bugs and suggest possible fixes to these issues.
 
-#### An Example of this:
+#### Here is an Example:
  
 >__Bug__: we had a bug where the game loop would throw an error when the block reached the bottom of the play area.
 >
