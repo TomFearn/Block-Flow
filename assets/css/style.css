@@ -38,11 +38,13 @@ body {
 
 
 .gameover-on {
-    z-index: 1;
+    text-align: center;
+    visibility: visible;
+    color: tomato;
 }
 
 .gameover-off {
-    z-index: -1;
+    visibility: hidden;
 }
 
 .bottom-row{
