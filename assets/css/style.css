@@ -22,7 +22,7 @@ body {
 
 #gameBoard {
     width: 322px;
-    max-height: 642px;
+    height: 642px;
     display: grid;
     grid-template-columns: repeat(10, 30px);
     grid-template-rows: repeat(21, 30px);
