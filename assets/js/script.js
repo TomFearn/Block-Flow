@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
 function setupBoard() {
     //clear the board
     squares.forEach(square => {
-        square.classList.remove('tetromino');
-        square.classList.remove('taken');
+        square.classList.remove('tetromino', 'taken');
+        square.style.backgroundColor = '';
     });
     //reset the score
     playerScore = 0;
@@ -79,57 +79,64 @@ let squares = [];
 let currentPosition = 4;
 let currentRotation = 0;
 
-// Define Tetromino shapes
+// Define Tetromino shapes with colors
 const tetrominoes = [
     // L-Tetromino
-    [
-        [1, 1, 1, 0],
-        [1, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [1, 1, 1],
+            [1, 0, 0]
+        ],
+        color: 'orange'
+    },
     // Z-Tetromino
-    [
-        [1, 1, 0, 0],
-        [0, 1, 1, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [1, 1, 0],
+            [0, 1, 1]
+        ],
+        color: 'red'
+    },
     // T-Tetromino
-    [
-        [0, 1, 0, 0],
-        [1, 1, 1, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [0, 1, 0],
+            [1, 1, 1]
+        ],
+        color: 'purple'
+    },
     // O-Tetromino
-    [
-        [1, 1, 0, 0],
-        [1, 1, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [1, 1, 0],
+            [1, 1, 0]
+        ],
+        color: 'yellow'
+    },
     // I-Tetromino
-    [
-        [1, 1, 1, 1],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [1, 1, 1, 1],
+            [0, 0, 0, 0]
+        ],
+        color: 'cyan'
+    },
     // S-Tetromino
-    [
-        [0, 1, 1, 0],
-        [1, 1, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [0, 1, 1],
+            [1, 1, 0]
+        ],
+        color: 'green'
+    },
     // J-Tetromino
-    [
-        [1, 1, 1, 0],
-        [0, 0, 1, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ]
+    {
+        shape: [
+            [1, 1, 1],
+            [0, 0, 1]
+        ],
+        color: 'blue'
+    }
 ];
 
 squares = Array.from(grid.querySelectorAll('.cell'));
@@ -139,7 +146,8 @@ squares = Array.from(grid.querySelectorAll('.cell'));
  * */
 
 let random = Math.floor(Math.random() * tetrominoes.length);
-let current = tetrominoes[random];
+let current = tetrominoes[random].shape;
+let currentColor = tetrominoes[random].color;
 
 
 /** 
@@ -149,7 +157,7 @@ function drawBlock() {
     current.forEach((row, rowIndex) => {
         row.forEach((cell, cellIndex) => {
             if (cell === 1) {
-                squares[currentPosition + rowIndex * width + cellIndex].classList.add('tetromino');
+                squares[currentPosition + rowIndex * width + cellIndex].style.backgroundColor = currentColor;
             }
         });
     });
@@ -162,7 +170,7 @@ function undrawBlock() {
     current.forEach((row, rowIndex) => {
         row.forEach((cell, cellIndex) => {
             if (cell === 1) {
-                squares[currentPosition + rowIndex * width + cellIndex].classList.remove('tetromino');
+                squares[currentPosition + rowIndex * width + cellIndex].style.backgroundColor = '';
             }
         });
     });
@@ -180,7 +188,6 @@ function moveDown() {
     if (freeze()) {
         // Check for filled rows and update the score
         checkFilledRow();
-        updateScore();
     }
 }
 
@@ -259,11 +266,13 @@ function freeze() {
         current.forEach((row, rowIndex) => row.forEach((cell, cellIndex) => {
             if (cell === 1) {
                 squares[currentPosition + rowIndex * width + cellIndex].classList.add('taken');
+                squares[currentPosition + rowIndex * width + cellIndex].style.backgroundColor = currentColor;
             }
         }));
         // Start a new Tetromino falling
         random = Math.floor(Math.random() * tetrominoes.length);
-        current = tetrominoes[random];
+        current = tetrominoes[random].shape;
+        currentColor = tetrominoes[random].color;
         currentPosition = 4;
         drawBlock();
         return true;
