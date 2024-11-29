@@ -12,13 +12,15 @@ for (let i = 0; i < 200; i++) {
 
 //Variables
 let run;
-let timer = 300;
+let timer = 1000;
 const multiplier = 0.96;
 const width = 10; // Number of columns in the grid
 const height = 20; // Number of rows in the grid
 let squares = [];
 let currentPosition = 4;
 let currentRotation = 0;
+let playerScore = 0;
+let highScore = 0;
 
 //Functions
 
@@ -30,6 +32,12 @@ document.addEventListener('DOMContentLoaded', function () {
         run = true;
         drawBlock();
         runGame();
+        //User input only accepted after page loaded
+        document.addEventListener('keydown', control);
+
+        document.getElementById('left').addEventListener('click', moveLeft);
+        document.getElementById('rotate').addEventListener('click', rotate);
+        document.getElementById('right').addEventListener('click', moveRight);
     });
 })
 
@@ -48,7 +56,7 @@ function setupBoard() {
     playerScore = 0;
     displayScore();
     //reset the timer
-    timer = 300;
+    timer = 1000;
     run = false
 }
 
@@ -59,17 +67,6 @@ function restart() {
     drawBlock();
     runGame();
     toggleGameOverMessage();
-}
-
-
-
-/**
- * Decrease the timer by 4%. Time is rounded to the nearest whole number.
- * Time is in milliseconds.
- */
-function decreaseTimer() {
-    timer = (timer * multiplier).toFixed(0);
-    //console.log(timer); for tesitng purposes
 }
 
 
@@ -181,7 +178,7 @@ function moveDown() {
     drawBlock();
     if (freeze()) {
         // Check for filled rows and update the score
-        checkFullRows();
+        clearRow();
     }
 }
 
@@ -287,98 +284,52 @@ function control(e) {
     }
 }
 
-document.addEventListener('keydown', control);
 
-document.getElementById('left').addEventListener('click', moveLeft);
-document.getElementById('rotate').addEventListener('click', rotate);
-document.getElementById('right').addEventListener('click', moveRight);
+function clearRow() {
+    for (let i = 0; i < 199; i += width) {
+        const row = [i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9]
 
-
-
-
-/**Checks for end of game */
-function checkGameOver() {
-    return false;
+        if (row.every(index => squares[index].classList.contains('taken'))) {
+            playerScore += 1
+            displayScore()
+            row.forEach(index => {
+                squares[index].classList.remove('taken')
+                squares[index].classList.remove('tetromino')
+                squares[index].style.backgroundColor = ''
+            })
+            const squaresRemoved = squares.splice(i, width)
+            squares = squaresRemoved.concat(squares)
+            squares.forEach(cell => grid.appendChild(cell))
+        }
+    }
 }
-
-/**
- * 
- * returns false
- */
-function endGame() {
-    return false;
-}
-
-
-
-
-
-
-
-
-let playerScore;
-let highScore;
 
 /**
  * displays the player score
  */
 function displayScore() {
-    document.querySelector(".player-score").value = playerScore
+    document.querySelector(".player-score").textContent = playerScore
+    checkHighScore()
+    document.querySelector(".high-score").textContent = highScore
 }
 
 function checkHighScore() {
     if (playerScore > highScore) {
         highScore = playerScore
     } else {
-        return false;
+        return;
     }
 }
 
-let fullRows = [];
 
-function checkFullRows() {
-    for (let row = 0; row < height; row++) {
-        let isFull = true;
-        for (let col = 0; col < width; col++) {
-            if (!squares[row * width + col].classList.contains('taken')) {
-                isFull = false;
-                break;
-            }
-        }
-        if (isFull) {
-            fullRows.push(row);
-        }
-    }
-
-    return fullRows;
+/**
+ * Decrease the timer by 4%. Time is rounded to the nearest whole number.
+ * Time is in milliseconds.
+ */
+function decreaseTimer() {
+    timer = (timer * multiplier).toFixed(0);
+    //console.log(timer); for tesitng purposes
 }
-
-
-function clearRows() {
-    for (let row of fullRows) {
-        for (let col = 0; col < width; col++) {
-            squares[row * width + col].classList.remove('tetromino');
-            squares[row * width + col].classList.remove('taken');
-        }
-    }
-}
-
-function updateScore() {
-    decreaseTimer();
-}
-
-//could have
-
-function rotateBlock() {
-
-}
-
-
-
-
-
-
-
 
 /**
  * Toggles the game over message on and off.
@@ -399,7 +350,18 @@ function toggleGameOverMessage() {
 }
 
 
+/**Checks for end of game */
+function checkGameOver() {
+    return false;
+}
 
+/**
+ * 
+ * returns false
+ */
+function endGame() {
+    return false;
+}
 
 
 
@@ -415,8 +377,6 @@ function runGame() {
         moveDown();
 
         if (freeze()) {
-            checkFullRows()
-            clearRows()
             if (checkGameOver()) {
                 run = endGame();
             } else {
