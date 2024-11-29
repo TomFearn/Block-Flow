@@ -12,7 +12,13 @@ for (let i = 0; i < 200; i++) {
 
 //Variables
 let run;
-
+let timer = 300;
+const multiplier = 0.96;
+const width = 10; // Number of columns in the grid
+const height = 20; // Number of rows in the grid
+let squares = [];
+let currentPosition = 4;
+let currentRotation = 0;
 
 //Functions
 
@@ -56,8 +62,6 @@ function restart() {
 }
 
 
-let timer = 300;
-const multiplier = 0.96;
 
 /**
  * Decrease the timer by 4%. Time is rounded to the nearest whole number.
@@ -68,16 +72,6 @@ function decreaseTimer() {
     //console.log(timer); for tesitng purposes
 }
 
-
-
-
-
-// Variables
-const width = 10; // Number of columns in the grid
-const height = 20; // Number of rows in the grid
-let squares = [];
-let currentPosition = 4;
-let currentRotation = 0;
 
 // Define Tetromino shapes
 const tetrominoes = [
@@ -179,8 +173,7 @@ function moveDown() {
     drawBlock();
     if (freeze()) {
         // Check for filled rows and update the score
-        checkFilledRow();
-        updateScore();
+        checkFullRows();
     }
 }
 
@@ -327,79 +320,98 @@ function checkHighScore() {
     }
 }
 
+let fullRows = [];
 
-function checkFilledRow() {
+function checkFullRows() {
+    for (let row = 0; row < height; row++) {
+        let isFull = true;
+        for (let col = 0; col < width; col++) {
+            if (!squares[row * width + col].classList.contains('taken')) {
+                isFull = false;
+                break;
+            }
+        }
+        if (isFull) {
+            fullRows.push(row);
+        }
+    }
 
+    return fullRows;
 }
 
 
-function clearRow() {
-
-}
-
-
-function updateScore() {
-    decreaseTimer();
-}
-
-//could have
-
-function rotateBlock() {
-
-}
-
-
-
-
-
-
-
-
-/**
- * Toggles the game over message on and off.
- */
-function toggleGameOverMessage() {
-    //game over message
-    let gameOver = document.getElementById('gameOverMessage');
-    if (gameOver.classList.contains('gameover-off')) {
-
-        gameOver.classList.add('gameover-on');
-        gameOver.classList.remove('gameover-off');
-
-    } else {
-
-        gameOver.classList.add('gameover-off');
-        gameOver.classList.remove('gameover-on');
+function clearRows() {
+    for (let row of fullRows){
+        for (let col = 0; col < width; col++) {
+            squares[row * width + col].classList.remove('tetromino');
+            squares[row * width + col].classList.remove('taken');
+        }
     }
 }
 
+    function updateScore() {
+        decreaseTimer();
+    }
+
+    //could have
+
+    function rotateBlock() {
+
+    }
 
 
 
 
 
-//Gameloop
 
-/**
- * The main game loop function. Uses a setTimeout to call itself every tick.
- */
-function runGame() {
-    console.log('running');
-    if (run === true) {
 
-        moveDown();
 
-        if (freeze()) {
-            //checkFilledRow(); // all the flled rows and board would be adjusted here
-            if (checkGameOver()) {
-                run = endGame();
+    /**
+     * Toggles the game over message on and off.
+     */
+    function toggleGameOverMessage() {
+        //game over message
+        let gameOver = document.getElementById('gameOverMessage');
+        if (gameOver.classList.contains('gameover-off')) {
+
+            gameOver.classList.add('gameover-on');
+            gameOver.classList.remove('gameover-off');
+
+        } else {
+
+            gameOver.classList.add('gameover-off');
+            gameOver.classList.remove('gameover-on');
+        }
+    }
+
+
+
+
+
+
+    //Gameloop
+
+    /**
+     * The main game loop function. Uses a setTimeout to call itself every tick.
+     */
+    function runGame() {
+        console.log('running');
+        if (run === true) {
+
+            moveDown();
+
+            if (freeze()) {
+                checkFullRows()
+                clearRows()   
+                if (checkGameOver()) {
+                    run = endGame();
+                } else {
+                    setTimeout(runGame, timer);
+                }
             } else {
                 setTimeout(runGame, timer);
             }
-        } else {
-            setTimeout(runGame, timer);
+        } else if (run === false) {
+            toggleGameOverMessage();
         }
-    } else if (run === false) {
-        toggleGameOverMessage();
     }
-}
