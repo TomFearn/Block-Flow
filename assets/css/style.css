@@ -9,6 +9,11 @@ body {
     margin: 0;
 }
 
+.hidden{
+    visibility: hidden;
+    position: absolute;
+}
+
 
 /* font colors */
 .blue{
@@ -34,14 +39,18 @@ body {
 /* navbar styles */
 #navbar{
     background-color: grey;
-    display: flex;
-    align-items: center;
+    padding: 20px;
 }
 
 #title-box{
+    width: 100%;
     justify-content: center;
 }
 
+.position-right{
+    position: absolute;
+    right: 15px;
+}
 
 /* instructions styles */
 #instructions{
@@ -64,8 +73,8 @@ body {
     grid-template-columns: repeat(10, 30px);
     grid-template-rows: repeat(21, 30px);
     grid-gap: 2px;
-    background-color: greenyellow;
-    border: 2px solid greenyellow;
+    background-color: rgb(34, 34, 34);
+    border: 2px solid rgb(34, 34, 34);
     padding: 0;
 }
 
@@ -109,9 +118,6 @@ body {
     align-items: center;
 }
 
-.hidden{
-    visibility: hidden;
-}
 
 #play{
     height: 70px;
@@ -133,10 +139,21 @@ body {
     #instructions{
         visibility: visible;
         position: relative;
+        z-index: 5;
     }
 
     #nav-button{
         visibility: hidden;
+    }
+
+    #navbnar-nav{
+        visibility: hidden;
+        position: absolute;
+    }
+
+    .large-hide{
+        visibility: hidden;
+        position: absolute;
     }
 }
 
