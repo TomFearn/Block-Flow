@@ -29,7 +29,7 @@ Tetris is a classic arcade game where the player is given randomly selected bloc
 ## Project Planning
 
 #### Our final project board:
-#### Our initial miro board:
+#### Our initial miro board: [Tetris miro board](https://miro.com/app/board/uXjVL_bgpm8=/)
 
 ### User Stories
 
@@ -74,5 +74,5 @@ We were also able to use the chat feature to explain code that others had writte
 
 ## Sources
 
-- __Bootstrap Documentation__: 
-- __GitHub co-pilot__:
+- [__Bootstrap Docs__](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
+- [__GitHub co-pilot__](https://github.com/features/copilot)
