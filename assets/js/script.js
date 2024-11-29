@@ -21,23 +21,16 @@ let currentPosition = 4;
 let currentRotation = 0;
 let playerScore = 0;
 let highScore = 0;
-
+let tickCounter = 0;
+let reset = false;
+let gameLoopTimeout;
 //Functions
 
 document.addEventListener('DOMContentLoaded', function () {
     //event listener for start button. runGame called upn click
-    document.getElementById('resetButton').addEventListener('click', function () {
-        //setup board function called
-        setupBoard();
-        run = true;
-        drawBlock();
-        runGame();
-        //User input only accepted after page loaded
-        document.addEventListener('keydown', control);
-
-        document.getElementById('left').addEventListener('click', moveLeft);
-        document.getElementById('rotate').addEventListener('click', rotate);
-        document.getElementById('right').addEventListener('click', moveRight);
+    document.getElementById('resetButton').addEventListener('click', () => {
+        reset = true;
+        restart();
     });
 })
 
@@ -57,16 +50,37 @@ function setupBoard() {
     displayScore();
     //reset the timer
     timer = 1000;
-    run = false
+    run = false;
+    tickCounter = 0;
 }
 
+function startGame() {
+    document.getElementById('left').addEventListener('click', moveLeft);
+    document.getElementById('rotate').addEventListener('click', rotate);
+    document.getElementById('right').addEventListener('click', moveRight);
+
+}
 
 function restart() {
-    //call setupBoard and runGame
     setupBoard();
-    drawBlock();
-    runGame();
-    toggleGameOverMessage();
+    run = false;
+    tickCounter = 0;
+    timer = 1000; // Reset the timer to its initial value
+    document.removeEventListener('keydown', control);
+    document.addEventListener('keydown', control);
+
+    document.getElementById('left').removeEventListener('click', moveLeft);
+    document.getElementById('left').addEventListener('click', moveLeft);
+
+    document.getElementById('rotate').removeEventListener('click', rotate);
+    document.getElementById('rotate').addEventListener('click', rotate);
+
+    document.getElementById('right').removeEventListener('click', moveRight);
+    document.getElementById('right').addEventListener('click', moveRight);
+
+    reset = false; // Reset the reset flag
+    clearTimeout(gameLoopTimeout); // Clear any existing timeouts
+    gameLoopTimeout = setTimeout(runGame, 1000); // Start the game loop after a short delay
 }
 
 
@@ -366,26 +380,46 @@ function endGame() {
 
 
 //Gameloop
-
+startGame();
+console.log(run);
 /**
  * The main game loop function. Uses a setTimeout to call itself every tick.
  */
 function runGame() {
+    console.log('start of run game: ' + run);
+    if (tickCounter === 0) {
+        run = true;
+        tickCounter++;
+    } else {
+        tickCounter++;
+    }
+
     console.log('running');
     if (run === true) {
-
+        console.log('should move down' + tickCounter);
         moveDown();
 
         if (freeze()) {
             if (checkGameOver()) {
                 run = endGame();
             } else {
-                setTimeout(runGame, timer);
+                gameLoopTimeout = setTimeout(runGame, timer);
             }
         } else {
-            setTimeout(runGame, timer);
+            gameLoopTimeout = setTimeout(runGame, timer);
         }
     } else if (run === false) {
         toggleGameOverMessage();
+        console.log('return run' + run);
+        return;
     }
+
+    if (reset === true) {
+        run = false;
+        console.log('Game reset');
+        return;
+    }
+
+    console.log('end of run game: ' + run);
 }
+
