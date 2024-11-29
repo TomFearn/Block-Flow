@@ -101,9 +101,9 @@ let run;
 
 //Functions
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
     //event listener for start button. runGame called upn click
-    document.getElementById('resetButton').addEventListener('click', function() {
+    document.getElementById('resetButton').addEventListener('click', function () {
         //setup board function called
         setupBoard();
         run = true;
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function(){
         runGame();
     });
 })
-    
+
 /**
 
  * Clears the board and resets the game.
@@ -128,7 +128,7 @@ function setupBoard() {
     displayScore();
     //reset the timer
     timer = 300;
-    run=false
+    run = false
 }
 
 
@@ -143,7 +143,7 @@ function restart() {
 
 let timer = 300;
 const multiplier = 0.96;
-    
+
 /**
  * Decrease the timer by 4%. Time is rounded to the nearest whole number.
  * Time is in milliseconds.
@@ -298,15 +298,49 @@ function moveRight() {
 
 
 /**
+ * Rotates the Tetromino 90 degrees clockwise.
+ */
+function rotate(matrix = current) {
+    console.log("Rotating block...");
+    undrawBlock();
+
+    const rotatedMatrix = current[0].map((_, colIndex) => current.map(row => row[colIndex])).map(row => row.reverse());
+    console.log("Rotated Matrix:", rotatedMatrix);
+
+    const originalPosition = currentPosition;
+    current = rotatedMatrix;
+
+    // Check if the rotated Tetromino is within the grid and not overlapping with taken cells
+    const isValidPosition = current.every((row, rowIndex) => row.every((cell, cellIndex) => {
+        const newPosition = currentPosition + rowIndex * width + cellIndex;
+        const isValid = cell === 0 || (newPosition >= 0 && newPosition < squares.length && !squares[newPosition].classList.contains('taken') && newPosition % width >= 0 && newPosition % width < width);
+        if (!isValid) {
+            console.log(`Invalid position at row ${rowIndex}, col ${cellIndex}, newPosition ${newPosition}`);
+        }
+        return isValid;
+    }));
+
+    if (!isValidPosition) {
+        console.log("Invalid position, rotating back to original...");
+        current = current[0].map((_, colIndex) => current.map(row => row[colIndex])).map(row => row.reverse()).map(row => row.reverse()).map(row => row.reverse()); // Rotate back to original
+        currentPosition = originalPosition;
+    }
+
+    drawBlock();
+    console.log("Block rotated successfully.");
+}
+
+
+/**
  * Freezes the current Tetromino in place if it has collided with a taken cell.
  * Adds the 'taken' class to the cells occupied by the Tetromino.
  * Spawns a new Tetromino and resets the current position.
  */
 function freeze() {
     if (current.some((row, rowIndex) => row.some((cell, cellIndex) => {
-        const index = currentPosition + rowIndex * width + cellIndex + width;
-        return cell === 1 && (index >= squares.length || squares[index].classList.contains('taken'));
-    }))) {
+            const index = currentPosition + rowIndex * width + cellIndex + width;
+            return cell === 1 && (index >= squares.length || squares[index].classList.contains('taken'));
+        }))) {
         current.forEach((row, rowIndex) => row.forEach((cell, cellIndex) => {
             if (cell === 1) {
                 squares[currentPosition + rowIndex * width + cellIndex].classList.add('taken');
@@ -343,7 +377,7 @@ document.addEventListener('keydown', control);
 /**Checks for end of game */
 function checkGameOver() {
     return false;
-} 
+}
 
 /**
  * 
@@ -372,14 +406,14 @@ let playerScore;
 let highScore;
 
 
-function displayScore(){
+function displayScore() {
     document.querySelector(".player-score").value = playerScore
 }
 
-function checkHighScore(){
-    if (playerScore > highScore){
+function checkHighScore() {
+    if (playerScore > highScore) {
         highScore = playerScore
-    } else{
+    } else {
         return false;
     }
 }
@@ -390,12 +424,12 @@ function checkFilledRow() {
 }
 
 
-function clearRow(){
+function clearRow() {
 
 }
 
 
-function updateScore(){
+function updateScore() {
     decreaseTimer();
 }
 
@@ -442,7 +476,7 @@ function runGame() {
     if (run === true) {
 
         moveDown();
-        
+
         if (freeze()) {
             //checkFilledRow(); // all the flled rows and board would be adjusted here
             if (checkGameOver()) {
