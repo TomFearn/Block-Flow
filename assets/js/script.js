@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
 function setupBoard() {
     //clear the board
     squares.forEach(square => {
-        square.classList.remove('tetromino');
-        square.classList.remove('taken');
+        square.classList.remove('tetromino', 'taken');
+        square.style.backgroundColor = '';
     });
     //reset the score
     playerScore = 0;
@@ -73,57 +73,64 @@ function decreaseTimer() {
 }
 
 
-// Define Tetromino shapes
+// Define Tetromino shapes with colors
 const tetrominoes = [
     // L-Tetromino
-    [
-        [1, 1, 1, 0],
-        [1, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [1, 1, 1],
+            [1, 0, 0]
+        ],
+        color: 'orange'
+    },
     // Z-Tetromino
-    [
-        [1, 1, 0, 0],
-        [0, 1, 1, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [1, 1, 0],
+            [0, 1, 1]
+        ],
+        color: 'red'
+    },
     // T-Tetromino
-    [
-        [0, 1, 0, 0],
-        [1, 1, 1, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [0, 1, 0],
+            [1, 1, 1]
+        ],
+        color: 'purple'
+    },
     // O-Tetromino
-    [
-        [1, 1, 0, 0],
-        [1, 1, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [1, 1, 0],
+            [1, 1, 0]
+        ],
+        color: 'yellow'
+    },
     // I-Tetromino
-    [
-        [1, 1, 1, 1],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [1, 1, 1, 1],
+            [0, 0, 0, 0]
+        ],
+        color: 'cyan'
+    },
     // S-Tetromino
-    [
-        [0, 1, 1, 0],
-        [1, 1, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [0, 1, 1],
+            [1, 1, 0]
+        ],
+        color: 'green'
+    },
     // J-Tetromino
-    [
-        [1, 1, 1, 0],
-        [0, 0, 1, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ]
+    {
+        shape: [
+            [1, 1, 1],
+            [0, 0, 1]
+        ],
+        color: 'blue'
+    }
 ];
 
 squares = Array.from(grid.querySelectorAll('.cell'));
@@ -133,7 +140,8 @@ squares = Array.from(grid.querySelectorAll('.cell'));
  * */
 
 let random = Math.floor(Math.random() * tetrominoes.length);
-let current = tetrominoes[random];
+let current = tetrominoes[random].shape;
+let currentColor = tetrominoes[random].color;
 
 
 /** 
@@ -143,7 +151,7 @@ function drawBlock() {
     current.forEach((row, rowIndex) => {
         row.forEach((cell, cellIndex) => {
             if (cell === 1) {
-                squares[currentPosition + rowIndex * width + cellIndex].classList.add('tetromino');
+                squares[currentPosition + rowIndex * width + cellIndex].style.backgroundColor = currentColor;
             }
         });
     });
@@ -156,7 +164,7 @@ function undrawBlock() {
     current.forEach((row, rowIndex) => {
         row.forEach((cell, cellIndex) => {
             if (cell === 1) {
-                squares[currentPosition + rowIndex * width + cellIndex].classList.remove('tetromino');
+                squares[currentPosition + rowIndex * width + cellIndex].style.backgroundColor = '';
             }
         });
     });
@@ -252,11 +260,13 @@ function freeze() {
         current.forEach((row, rowIndex) => row.forEach((cell, cellIndex) => {
             if (cell === 1) {
                 squares[currentPosition + rowIndex * width + cellIndex].classList.add('taken');
+                squares[currentPosition + rowIndex * width + cellIndex].style.backgroundColor = currentColor;
             }
         }));
         // Start a new Tetromino falling
         random = Math.floor(Math.random() * tetrominoes.length);
-        current = tetrominoes[random];
+        current = tetrominoes[random].shape;
+        currentColor = tetrominoes[random].color;
         currentPosition = 4;
         drawBlock();
         return true;
@@ -278,6 +288,10 @@ function control(e) {
 }
 
 document.addEventListener('keydown', control);
+
+document.getElementById('left').addEventListener('click', moveLeft);
+document.getElementById('rotate').addEventListener('click', rotate);
+document.getElementById('right').addEventListener('click', moveRight);
 
 
 
@@ -341,7 +355,7 @@ function checkFullRows() {
 
 
 function clearRows() {
-    for (let row of fullRows){
+    for (let row of fullRows) {
         for (let col = 0; col < width; col++) {
             squares[row * width + col].classList.remove('tetromino');
             squares[row * width + col].classList.remove('taken');
@@ -349,69 +363,69 @@ function clearRows() {
     }
 }
 
-    function updateScore() {
-        decreaseTimer();
+function updateScore() {
+    decreaseTimer();
+}
+
+//could have
+
+function rotateBlock() {
+
+}
+
+
+
+
+
+
+
+
+/**
+ * Toggles the game over message on and off.
+ */
+function toggleGameOverMessage() {
+    //game over message
+    let gameOver = document.getElementById('gameOverMessage');
+    if (gameOver.classList.contains('gameover-off')) {
+
+        gameOver.classList.add('gameover-on');
+        gameOver.classList.remove('gameover-off');
+
+    } else {
+
+        gameOver.classList.add('gameover-off');
+        gameOver.classList.remove('gameover-on');
     }
-
-    //could have
-
-    function rotateBlock() {
-
-    }
+}
 
 
 
 
 
 
+//Gameloop
 
+/**
+ * The main game loop function. Uses a setTimeout to call itself every tick.
+ */
+function runGame() {
+    console.log('running');
+    if (run === true) {
 
-    /**
-     * Toggles the game over message on and off.
-     */
-    function toggleGameOverMessage() {
-        //game over message
-        let gameOver = document.getElementById('gameOverMessage');
-        if (gameOver.classList.contains('gameover-off')) {
+        moveDown();
 
-            gameOver.classList.add('gameover-on');
-            gameOver.classList.remove('gameover-off');
-
-        } else {
-
-            gameOver.classList.add('gameover-off');
-            gameOver.classList.remove('gameover-on');
-        }
-    }
-
-
-
-
-
-
-    //Gameloop
-
-    /**
-     * The main game loop function. Uses a setTimeout to call itself every tick.
-     */
-    function runGame() {
-        console.log('running');
-        if (run === true) {
-
-            moveDown();
-
-            if (freeze()) {
-                checkFullRows()
-                clearRows()   
-                if (checkGameOver()) {
-                    run = endGame();
-                } else {
-                    setTimeout(runGame, timer);
-                }
+        if (freeze()) {
+            checkFullRows()
+            clearRows()
+            if (checkGameOver()) {
+                run = endGame();
             } else {
                 setTimeout(runGame, timer);
             }
-        } else if (run === false) {
-            toggleGameOverMessage();
+        } else {
+            setTimeout(runGame, timer);
         }
+    } else if (run === false) {
+        toggleGameOverMessage();
     }
+}

@@ -36,11 +36,6 @@ body {
     background-color: black;
 }
 
-.tetromino {
-    background-color: red !important ;
-}
-
-
 .gameover-on {
     text-align: center;
     visibility: visible;
