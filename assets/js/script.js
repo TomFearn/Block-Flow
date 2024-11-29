@@ -2,8 +2,12 @@ const grid = document.querySelector('#gameBoard');
 for (let i = 0; i < 200; i++) {
     const cell = document.createElement('div');
     cell.classList.add('cell');
+    cell.classList.remove('tetromino');
+    cell.classList.remove('taken');
     grid.appendChild(cell);
-
+    if (i >= 200) {
+        cell.classList.add('taken bottom-row');
+    }
 }
 
 //Variables
@@ -12,12 +16,12 @@ let run;
 
 //Functions
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
     //event listener for start button. runGame called upn click
-    document.getElementById('resetButton').addEventListener('click', function() {
+    document.getElementById('resetButton').addEventListener('click', function () {
         //setup board function called
-        run = true;
         setupBoard();
+        run = true;
         drawBlock();
         runGame();
     });
@@ -29,7 +33,19 @@ document.addEventListener('DOMContentLoaded', function(){
 
  */
 function setupBoard() {
+    //clear the board
+    squares.forEach(square => {
+        square.classList.remove('tetromino');
+        square.classList.remove('taken');
+    });
+    //reset the score
+    playerScore = 0;
+    displayScore();
+    //reset the timer
+    timer = 300;
+    run = false
 }
+
 
 function restart() {
     //call setupBoard and runGame
@@ -197,6 +213,40 @@ function moveRight() {
 
 
 /**
+ * Rotates the Tetromino 90 degrees clockwise.
+ */
+function rotate(matrix = current) {
+    console.log("Rotating block...");
+    undrawBlock();
+
+    const rotatedMatrix = current[0].map((_, colIndex) => current.map(row => row[colIndex])).map(row => row.reverse());
+    console.log("Rotated Matrix:", rotatedMatrix);
+
+    const originalPosition = currentPosition;
+    current = rotatedMatrix;
+
+    // Check if the rotated Tetromino is within the grid and not overlapping with taken cells
+    const isValidPosition = current.every((row, rowIndex) => row.every((cell, cellIndex) => {
+        const newPosition = currentPosition + rowIndex * width + cellIndex;
+        const isValid = cell === 0 || (newPosition >= 0 && newPosition < squares.length && !squares[newPosition].classList.contains('taken') && newPosition % width >= 0 && newPosition % width < width);
+        if (!isValid) {
+            console.log(`Invalid position at row ${rowIndex}, col ${cellIndex}, newPosition ${newPosition}`);
+        }
+        return isValid;
+    }));
+
+    if (!isValidPosition) {
+        console.log("Invalid position, rotating back to original...");
+        current = current[0].map((_, colIndex) => current.map(row => row[colIndex])).map(row => row.reverse()).map(row => row.reverse()).map(row => row.reverse()); // Rotate back to original
+        currentPosition = originalPosition;
+    }
+
+    drawBlock();
+    console.log("Block rotated successfully.");
+}
+
+
+/**
  * Freezes the current Tetromino in place if it has collided with a taken cell.
  * Adds the 'taken' class to the cells occupied by the Tetromino.
  * Spawns a new Tetromino and resets the current position.
@@ -338,18 +388,15 @@ function runGame() {
     if (run === true) {
 
         moveDown();
-        setTimeout(() => {
-            if (freeze()) {
-                //checkFilledRow(); // all the flled rows and board would be adjusted here
-                if (checkGameOver()) {
-                    run = endGame();
-                } else {
-                    setTimeout(runGame, timer);
-                }
+
+        if (freeze()) {
+            //checkFilledRow(); // all the flled rows and board would be adjusted here
+            if (checkGameOver()) {
+                run = endGame();
             } else {
                 setTimeout(runGame, timer);
             }
-        }, 100)
+        }
 
     } else if (run === false) {
         toggleGameOverMessage();
