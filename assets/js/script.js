@@ -410,9 +410,8 @@ function runGame() {
             } else {
                 setTimeout(runGame, timer);
             }
-        } else {
-            setTimeout(runGame, timer);
         }
+
     } else if (run === false) {
         toggleGameOverMessage();
     }
