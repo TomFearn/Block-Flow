@@ -12,7 +12,13 @@ for (let i = 0; i < 200; i++) {
 
 //Variables
 let run;
-
+let timer = 300;
+const multiplier = 0.96;
+const width = 10; // Number of columns in the grid
+const height = 20; // Number of rows in the grid
+let squares = [];
+let currentPosition = 4;
+let currentRotation = 0;
 
 //Functions
 
@@ -35,8 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
 function setupBoard() {
     //clear the board
     squares.forEach(square => {
-        square.classList.remove('tetromino');
-        square.classList.remove('taken');
+        square.classList.remove('tetromino', 'taken');
+        square.style.backgroundColor = '';
     });
     //reset the score
     playerScore = 0;
@@ -56,8 +62,6 @@ function restart() {
 }
 
 
-let timer = 300;
-const multiplier = 0.96;
 
 /**
  * Decrease the timer by 4%. Time is rounded to the nearest whole number.
@@ -69,67 +73,64 @@ function decreaseTimer() {
 }
 
 
-
-
-
-// Variables
-const width = 10; // Number of columns in the grid
-const height = 20; // Number of rows in the grid
-let squares = [];
-let currentPosition = 4;
-let currentRotation = 0;
-
-// Define Tetromino shapes
+// Define Tetromino shapes with colors
 const tetrominoes = [
     // L-Tetromino
-    [
-        [1, 1, 1, 0],
-        [1, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [1, 1, 1],
+            [1, 0, 0]
+        ],
+        color: 'orange'
+    },
     // Z-Tetromino
-    [
-        [1, 1, 0, 0],
-        [0, 1, 1, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [1, 1, 0],
+            [0, 1, 1]
+        ],
+        color: 'red'
+    },
     // T-Tetromino
-    [
-        [0, 1, 0, 0],
-        [1, 1, 1, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [0, 1, 0],
+            [1, 1, 1]
+        ],
+        color: 'purple'
+    },
     // O-Tetromino
-    [
-        [1, 1, 0, 0],
-        [1, 1, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [1, 1, 0],
+            [1, 1, 0]
+        ],
+        color: 'yellow'
+    },
     // I-Tetromino
-    [
-        [1, 1, 1, 1],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [1, 1, 1, 1],
+            [0, 0, 0, 0]
+        ],
+        color: 'cyan'
+    },
     // S-Tetromino
-    [
-        [0, 1, 1, 0],
-        [1, 1, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
+    {
+        shape: [
+            [0, 1, 1],
+            [1, 1, 0]
+        ],
+        color: 'green'
+    },
     // J-Tetromino
-    [
-        [1, 1, 1, 0],
-        [0, 0, 1, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ]
+    {
+        shape: [
+            [1, 1, 1],
+            [0, 0, 1]
+        ],
+        color: 'blue'
+    }
 ];
 
 squares = Array.from(grid.querySelectorAll('.cell'));
@@ -139,7 +140,8 @@ squares = Array.from(grid.querySelectorAll('.cell'));
  * */
 
 let random = Math.floor(Math.random() * tetrominoes.length);
-let current = tetrominoes[random];
+let current = tetrominoes[random].shape;
+let currentColor = tetrominoes[random].color;
 
 
 /** 
@@ -149,7 +151,7 @@ function drawBlock() {
     current.forEach((row, rowIndex) => {
         row.forEach((cell, cellIndex) => {
             if (cell === 1) {
-                squares[currentPosition + rowIndex * width + cellIndex].classList.add('tetromino');
+                squares[currentPosition + rowIndex * width + cellIndex].style.backgroundColor = currentColor;
             }
         });
     });
@@ -162,7 +164,7 @@ function undrawBlock() {
     current.forEach((row, rowIndex) => {
         row.forEach((cell, cellIndex) => {
             if (cell === 1) {
-                squares[currentPosition + rowIndex * width + cellIndex].classList.remove('tetromino');
+                squares[currentPosition + rowIndex * width + cellIndex].style.backgroundColor = '';
             }
         });
     });
@@ -179,8 +181,7 @@ function moveDown() {
     drawBlock();
     if (freeze()) {
         // Check for filled rows and update the score
-        checkFilledRow();
-        updateScore();
+        checkFullRows();
     }
 }
 
@@ -259,11 +260,13 @@ function freeze() {
         current.forEach((row, rowIndex) => row.forEach((cell, cellIndex) => {
             if (cell === 1) {
                 squares[currentPosition + rowIndex * width + cellIndex].classList.add('taken');
+                squares[currentPosition + rowIndex * width + cellIndex].style.backgroundColor = currentColor;
             }
         }));
         // Start a new Tetromino falling
         random = Math.floor(Math.random() * tetrominoes.length);
-        current = tetrominoes[random];
+        current = tetrominoes[random].shape;
+        currentColor = tetrominoes[random].color;
         currentPosition = 4;
         drawBlock();
         return true;
@@ -285,6 +288,10 @@ function control(e) {
 }
 
 document.addEventListener('keydown', control);
+
+document.getElementById('left').addEventListener('click', moveLeft);
+document.getElementById('rotate').addEventListener('click', rotate);
+document.getElementById('right').addEventListener('click', moveRight);
 
 
 
@@ -327,16 +334,34 @@ function checkHighScore() {
     }
 }
 
+let fullRows = [];
 
-function checkFilledRow() {
+function checkFullRows() {
+    for (let row = 0; row < height; row++) {
+        let isFull = true;
+        for (let col = 0; col < width; col++) {
+            if (!squares[row * width + col].classList.contains('taken')) {
+                isFull = false;
+                break;
+            }
+        }
+        if (isFull) {
+            fullRows.push(row);
+        }
+    }
 
+    return fullRows;
 }
 
 
-function clearRow() {
-
+function clearRows() {
+    for (let row of fullRows) {
+        for (let col = 0; col < width; col++) {
+            squares[row * width + col].classList.remove('tetromino');
+            squares[row * width + col].classList.remove('taken');
+        }
+    }
 }
-
 
 function updateScore() {
     decreaseTimer();
@@ -390,14 +415,16 @@ function runGame() {
         moveDown();
 
         if (freeze()) {
-            //checkFilledRow(); // all the flled rows and board would be adjusted here
+            checkFullRows()
+            clearRows()
             if (checkGameOver()) {
                 run = endGame();
             } else {
                 setTimeout(runGame, timer);
             }
+        } else {
+            setTimeout(runGame, timer);
         }
-
     } else if (run === false) {
         toggleGameOverMessage();
     }

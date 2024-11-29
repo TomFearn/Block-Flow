@@ -5,10 +5,19 @@ body {
     min-height: 120vh;
 }
 
+.row{
+    margin: 0;
+}
 
 #instructions{
     visibility: hidden;
     position: absolute;
+}
+
+#instructions-block{
+    visibility: hidden;
+    position: absolute;
+    color: white;
 }
 
 #gameBoard {
@@ -26,16 +35,6 @@ body {
 .cell {
     background-color: black;
 }
-
-.tetromino {
-    background-color: red !important ;
-}
-
-
-
-
-
-
 
 .gameover-on {
     text-align: center;
@@ -59,9 +58,24 @@ body {
     color: maroon;
 }
 
-@media screen and (min-width: 480) {
-    #gameBoard{
-        grid-template-columns: repeat(10, 35px);
-    grid-template-rows: repeat(21, 35px);
+@media screen and (min-width: 769px) {
+    #instructions{
+        visibility: visible;
+        position: relative;
+    }
+
+    #nav-button{
+        visibility: hidden;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    #instructions{
+        visibility: hidden;
+        position: absolute;
+    }
+    #instructions-block{
+        visibility: visible;
+        position: relative;
     }
 }
