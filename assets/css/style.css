@@ -14,6 +14,12 @@ body {
     position: absolute;
 }
 
+#instructions-block{
+    visibility: hidden;
+    position: absolute;
+    color: white;
+}
+
 #gameBoard {
     width: 322px;
     max-height: 642px;
@@ -63,5 +69,16 @@ body {
 
     #nav-button{
         visibility: hidden;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    #instructions{
+        visibility: hidden;
+        position: absolute;
+    }
+    #instructions-block{
+        visibility: visible;
+        position: relative;
     }
 }
