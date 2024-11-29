@@ -6,13 +6,13 @@
 
 ## Contents
 
-1. Overview
-2. Project Planning
-3. Project Development
-4. Deployment
-5. Testing
-6. Impact of AI
-7. Sources
+1. [Overview](#overview)
+2. [Project Planning](#project-planning)
+3. [Project Development](#project-development)
+4. [Project Deployment](#project-deployment)
+5. [Testing](#testing)
+6. [Impact of AI](#impact-of-ai)
+7. [Sources](#sources)
 
 
 ## Overview
@@ -59,15 +59,15 @@ We used the GitHub co-pilot extension mainly using the chat window but also the 
 
 ### What did we use it for?
 
-We used AI to explain bugs and suggest possible fixes to these issues.
+We used AI for debugging adn to explain any bugs and suggest possible fixes to these issues.
 
 #### An Example of this:
  
-__Bug__: we had a bug where the game loop would throw an error when the block reached the bottom of the play area.
-
-__Co-pilot Explanation__: the function used for checking for indexes that were out of range
-
-__Actions taken__: Co-pilot also suggested a quick one line fix to check that the index was within the correct range and once it had explained the code to us it was implemented.
+>__Bug__: we had a bug where the game loop would throw an error when the block reached the bottom of the play area.
+>
+>__Co-pilot Explanation__: the function used for checking for indexes that were out of range
+>
+>__Actions taken__: Co-pilot also suggested a quick one line fix to check that the index was within the correct range and once it had explained the code to us it was implemented.
 
 We were also able to use the chat feature to explain code that others had written to get a faster understanding of our current progress in the project and to ensure that any features added were compatible with the other features the team had implemented.
 
