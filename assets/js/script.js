@@ -79,6 +79,7 @@ let squares = [];
 let currentPosition = 4;
 let currentRotation = 0;
 
+
 // Define Tetromino shapes with colors
 const tetrominoes = [
     // L-Tetromino
@@ -294,6 +295,10 @@ function control(e) {
 }
 
 document.addEventListener('keydown', control);
+
+document.getElementById('left').addEventListener('click', moveLeft);
+document.getElementById('rotate').addEventListener('click', rotate);
+document.getElementById('right').addEventListener('click', moveRight);
 
 
 
