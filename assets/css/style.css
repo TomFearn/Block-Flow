@@ -1,5 +1,5 @@
 
-
+/* general styles */
 body {
     background-color: black;
     min-height: 120vh;
@@ -9,6 +9,41 @@ body {
     margin: 0;
 }
 
+
+/* font colors */
+.blue{
+    color: blue;
+}
+.green{
+    color: green;
+}
+.red{
+    color: red;
+}
+.purple{
+    color: purple;
+}
+.orange{
+    color: orange;
+}
+.yellow{
+    color: yellow;
+}
+
+
+/* navbar styles */
+#navbar{
+    background-color: grey;
+    display: flex;
+    align-items: center;
+}
+
+#title-box{
+    justify-content: center;
+}
+
+
+/* instructions styles */
 #instructions{
     visibility: hidden;
     position: absolute;
@@ -20,6 +55,8 @@ body {
     color: white;
 }
 
+
+/* gameboard styles */
 #gameBoard {
     width: 322px;
     height: 642px;
@@ -36,28 +73,62 @@ body {
     background-color: black;
 }
 
+.bottom-row{
+    visibility: hidden;
+}
+
+
+/* gameover styles */
+.gameover-off {
+    visibility: hidden;
+}
+
 .gameover-on {
     text-align: center;
     visibility: visible;
     color: tomato;
 }
 
-.gameover-off {
-    visibility: hidden;
-}
 
-.bottom-row{
-    visibility: hidden;
-}
-
+/* score board styles */
 #score-board{
     color: white;
 }
 
 .score{
-    color: maroon;
+    color: red;
 }
 
+/* button styles */
+/* play button */
+.play-game{
+    height: 700px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+#play{
+    height: 70px;
+    width: 250px;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+
+}
+
+/* game buttons */
+.rotate{
+    display: block;
+}
+
+
+/* media queries for adaptive display on larger screen sizes */
 @media screen and (min-width: 769px) {
     #instructions{
         visibility: visible;
