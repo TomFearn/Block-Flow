@@ -1,5 +1,5 @@
 
-
+/* general styles */
 body {
     background-color: black;
     min-height: 120vh;
@@ -9,6 +9,51 @@ body {
     margin: 0;
 }
 
+.hidden{
+    visibility: hidden;
+    position: absolute;
+}
+
+
+/* font colors */
+.blue{
+    color: blue;
+}
+.green{
+    color: green;
+}
+.red{
+    color: red;
+}
+.purple{
+    color: purple;
+}
+.orange{
+    color: orange;
+}
+.yellow{
+    color: yellow;
+}
+
+
+/* navbar styles */
+#navbar{
+    background-color: grey;
+    padding: 20px;
+}
+
+#title-box{
+    width: 100%;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.position-right{
+    position: absolute;
+    right: 15px;
+}
+
+/* instructions styles */
 #instructions{
     visibility: hidden;
     position: absolute;
@@ -18,8 +63,11 @@ body {
     visibility: hidden;
     position: absolute;
     color: white;
+    padding-left: 20px;
 }
 
+
+/* gameboard styles */
 #gameBoard {
     width: 322px;
     height: 642px;
@@ -27,13 +75,23 @@ body {
     grid-template-columns: repeat(10, 30px);
     grid-template-rows: repeat(21, 30px);
     grid-gap: 2px;
-    background-color: greenyellow;
-    border: 2px solid greenyellow;
+    background-color: rgb(34, 34, 34);
+    border: 2px solid rgb(34, 34, 34);
     padding: 0;
 }
 
 .cell {
     background-color: black;
+}
+
+.bottom-row{
+    visibility: hidden;
+}
+
+
+/* gameover styles */
+.gameover-off {
+    visibility: hidden;
 }
 
 .gameover-on {
@@ -42,30 +100,72 @@ body {
     color: tomato;
 }
 
-.gameover-off {
-    visibility: hidden;
-}
 
-.bottom-row{
-    visibility: hidden;
-}
-
+/* score board styles */
 #score-board{
     color: white;
+    padding-right: 20px;
 }
 
 .score{
-    color: maroon;
+    color: red;
 }
 
+/* button styles */
+/* play button */
+.play-game{
+    height: 700px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#play{
+    height: 70px;
+    width: 250px;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+
+}
+
+/* reset button */
+.reset-button{
+    background-color: red;
+}
+
+/* game buttons */
+.game-button{
+    background-color: darkgray;
+}
+
+
+/* media queries for adaptive display on larger screen sizes */
 @media screen and (min-width: 769px) {
     #instructions{
         visibility: visible;
         position: relative;
+        z-index: 5;
     }
 
     #nav-button{
         visibility: hidden;
+    }
+
+    #navbnar-nav{
+        visibility: hidden;
+        position: absolute;
+    }
+
+    .large-hide{
+        visibility: hidden;
+        position: absolute;
+    }
+
+    #score-board{
+        padding-bottom: 200px;
     }
 }
 
