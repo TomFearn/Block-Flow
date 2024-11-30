@@ -45,6 +45,7 @@ body {
 #title-box{
     width: 100%;
     justify-content: center;
+    text-decoration: none;
 }
 
 .position-right{
@@ -62,6 +63,7 @@ body {
     visibility: hidden;
     position: absolute;
     color: white;
+    padding-left: 20px;
 }
 
 
@@ -102,6 +104,7 @@ body {
 /* score board styles */
 #score-board{
     color: white;
+    padding-right: 20px;
 }
 
 .score{
@@ -128,9 +131,14 @@ body {
 
 }
 
+/* reset button */
+.reset-button{
+    background-color: red;
+}
+
 /* game buttons */
-.rotate{
-    display: block;
+.game-button{
+    background-color: darkgray;
 }
 
 
@@ -154,6 +162,10 @@ body {
     .large-hide{
         visibility: hidden;
         position: absolute;
+    }
+
+    #score-board{
+        padding-bottom: 200px;
     }
 }
 
