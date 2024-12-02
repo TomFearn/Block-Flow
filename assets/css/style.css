@@ -178,6 +178,7 @@ body{
 /* game buttons */
 .game-button{
     background-color: darkgray;
+    z-index: 5;
 }
 
 
