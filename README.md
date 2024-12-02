@@ -12,7 +12,8 @@
 4. [Project Deployment](#project-deployment)
 5. [Testing](#testing)
 6. [Impact of AI](#impact-of-ai)
-7. [Sources](#sources)
+7. [Future features](#)
+8. [Sources](#sources)
 
 
 ## Overview
@@ -252,6 +253,24 @@ We were also able to use the chat feature to explain code that others had writte
 ### <ins>Summary</ins>
 
 The AI tools used did have a positive impact on our project. They significantly improved our efficiency by providing quick explanations to bugs and offering code explanations. This allowed us to focus more on developing the key features rather than spending excessive time debugging. The ability to quickly understand and integrate each other's code through AI explanations also enhanced our collaboration and productivity.
+
+
+## Future Features
+
+Our project in it's current form is a working minimum viable product and there are a couple additions or changes we could make to make the game play smoother and enhance the user experience. These could be things such as buttons and effects to bug fixes. We have compiled a list of these below:
+
+
+- Save a block for future use - a player can reserve a block during the game that they can use later on
+- See what the upcoming blocks are
+- Add a score mulitplier for when multiple lines are cleared at once
+- Create a larger leaderboard that uses player names and scores.
+- Add music and sound effects
+
+
+### Bug fixes
+- Additional styling to the bottom of the grid to remove some grey space.
+- Fix the rotate function as currently in some cases a bug can occur when rotating shapes at the edge of the grid.
+
 
 ## Sources
 
