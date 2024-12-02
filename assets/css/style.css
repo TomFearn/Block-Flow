@@ -1,5 +1,8 @@
 
-variables
+/* google fonts import */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+/*variables*/
 :root {
     --bg-basic: black;
 }
@@ -8,6 +11,7 @@ variables
 /* general styles */
 body {
     min-height: 120vh;
+    font-family: 'VT323', monospace;
 }
 
 .row{
@@ -45,11 +49,14 @@ body{
 .yellow{
     color: yellow;
 }
+.cyan{
+    color: cyan;
+}
 
 
 /* navbar styles */
 #navbar{
-    background-color: grey;
+    background-color: black;
     padding: 20px;
     box-shadow: 10px;
 }
@@ -58,6 +65,14 @@ body{
     width: 100%;
     justify-content: center;
     text-decoration: none;
+}
+
+#title{
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 2rem;
+    font-family: 'Press Start 2P', system-ui;
 }
 
 .position-right{
