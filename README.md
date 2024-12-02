@@ -257,6 +257,9 @@ The AI tools used did have a positive impact on our project. They significantly 
 
 - [__Bootstrap Docs__](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
 - [__GitHub co-pilot__](https://github.com/features/copilot)
+- [__W2 Schools__](https://www.w3schools.com/)
+- [__Non-Boring Gradients__](https://non-boring-gradients.netlify.app/)
+- [__Real Favicon Generator__](https://realfavicongenerator.net/)
 
 We also took inspiration from a snake game tutorial for our grid set up:
 
