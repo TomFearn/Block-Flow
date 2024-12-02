@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         reset = true;
         restart();
     });
+    window.addEventListener("touchstart", touchHandler, false); //for mobile controls
 })
 
 /**
@@ -337,6 +338,16 @@ function control(e) {
         moveRight();
     } else if (e.keyCode === 83) {
         moveDown();
+    }
+}
+
+// fix for mobile controls
+
+function touchHandler(event){
+    if(event.touches.length > 1){
+        //the event is multi-touch
+        //you can then prevent the behavior
+        event.preventDefault()
     }
 }
 
