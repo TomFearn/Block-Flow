@@ -33,83 +33,64 @@ Tetris is a classic arcade game where the player is given randomly selected bloc
 
 ### <ins>Must-Have User Stories</ins>
 
-> #### Title:
-> #### User Story: 
+> #### Title: Start Game Button
+> #### User Story: As a user I want to be able to start the game when I choose not when the webpage loads.
 >
 > #### Acceptance Criteria:
-> - 
-> - 
-> - 
+> - The game does not automatically start when the webpage loads.
+> - A "Start Game" button is displayed for the user to begin the game.
+> - Clicking the "Start Game" button starts the game.
 > #### Tasks:
-> -
-> -
-> -
+> - Create a "Start Game" button in the UI.
+> - Prevent game logic from running on page load.
+> - Implement functionality to start the game when the button is clicked.
 
-> #### Title:
-> #### User Story: 
+> #### Title: Move block left and right
+> #### User Story: As a user I want to be able to interact with the game and have control over the direction of the blocks.
 >
 > #### Acceptance Criteria:
-> - 
-> - 
-> - 
+> - Users can move blocks left and right using keyboard inputs (e.g., left and right arrow keys).
+> - Movement is smooth and responsive during gameplay.
+> - Blocks do not move beyond the edges of the game grid.
 > #### Tasks:
-> -
-> -
-> -
+> - Map left and right arrow keys to block movement.
+> - Implement logic to move blocks left and right within the grid boundaries.
+> - Test responsiveness of left and right movement during gameplay.
 
 
-> #### Title:
-> #### User Story: 
+> #### Title: Clear a line when filled
+> #### User Story: As a user I want to be able progress in the game and clear lines
 >
 > #### Acceptance Criteria:
-> - 
-> - 
-> - 
+> - The game row is cleared when the row is full
+> - The rest of the blocks move down
 > #### Tasks:
-> -
-> -
-> -
+> - Loop through each row of the board and check it is filled
+> - Update the game board to remove a full row
+> - Update the game board to move the rest of the blocks down
 
 
 
-> #### Title:
-> #### User Story: 
+> #### Title: Score increases with lines cleared
+> #### User Story: As a player I want to be able to score points as I play the game.
 >
 > #### Acceptance Criteria:
-> - 
-> - 
-> - 
+> - The score updates each time a row is filled
 > #### Tasks:
-> -
-> -
-> -
+> - Target the score display text and add the score
 
 
 
-> #### Title:
-> #### User Story: 
+> #### Title: Display High Score
+> #### User Story: As a user, I want to see the high score displayed, so I can track the best performance in the game.
 >
 > #### Acceptance Criteria:
-> - 
-> - 
-> - 
+> - The high score is displayed prominently on the game screen.
+> - The high score is updated whenever a new higher score is achieved.
 > #### Tasks:
-> -
-> -
-> -
+> - Add a section in the UI to display the high score.
+> - Implement logic to update the high score when a new higher score is achieved.
 
-
-> #### Title:
-> #### User Story: 
->
-> #### Acceptance Criteria:
-> - 
-> - 
-> - 
-> #### Tasks:
-> -
-> -
-> -
 
 ### <ins>Should-Have User Stories</ins>
 
@@ -117,53 +98,63 @@ Tetris is a classic arcade game where the player is given randomly selected bloc
 > #### User Story: 
 >
 > #### Acceptance Criteria:
-> - 
-> - 
-> - 
+> - Users can rotate blocks using a designated keyboard input (e.g., W).
+> - Rotation is smooth and responsive during gameplay.
+> - Blocks rotate within the boundaries of the game grid.
+> - Blocks do not overlap with other blocks or exceed grid boundaries when rotated.
 > #### Tasks:
-> -
-> -
-> -
+> - Map a keyboard key (e.g., W) to block rotation.
+> - Implement logic to rotate blocks clockwise.
+> - Add collision detection to prevent rotation if it causes overlaps or boundary violations.
+> - Test the responsiveness and accuracy of block rotation during gameplay.
 
-> #### Title:
-> #### User Story: 
+> #### Title: Reset button
+> #### User Story: As a user I want to reset the game whenever I want if i am not happy with my progress or if the game stops working.
 >
 > #### Acceptance Criteria:
-> - 
-> - 
-> - 
+> - A button that when clicked/pressed resets the game state and restarts a new game
 > #### Tasks:
-> -
-> -
-> -
+> - The button breaks out of the game loop and restarts it
 
 ### <ins>Could-Have User Stories</ins>
 
-> #### Title:
-> #### User Story: 
+> #### Title: Increase block speed as score increases
+> #### User Story: As a player, I want the block speed to increase as my score goes up, so that the game becomes more challenging as I progress.
 >
 > #### Acceptance Criteria:
-> - 
-> - 
-> - 
+> - The falling speed of blocks increases automatically as the player’s score reaches specific thresholds.
+> - Speed adjustments are smooth and do not interrupt gameplay.
+> - The speed cannot decrease, even if the score drops.
+> - Speed levels and thresholds are clearly defined in the game logic.
 > #### Tasks:
-> -
-> -
-> -
+> - Define score milestones at which block speed increases (e.g., every 5 points).
+> - Implement logic to increase block speed when these milestones are reached.
+> - Ensure that the speed increase is gradual and does not cause gameplay to feel abrupt or unfair.
+> - Test the game to verify that the block speed increases correctly as the score increases.
 
-> #### Title:
-> #### User Story: 
+> #### Title: Multiplier for multiple lines cleared
+> #### User Story: As a player I want to be awarded more points for clearing more rows.
 >
 > #### Acceptance Criteria:
-> - 
-> - 
-> - 
+> - The game checks for multiple rows and adds appropriate score
 > #### Tasks:
-> -
-> -
-> -
+> - Check the game board for multiple full rows
+> - Apply multiplier to score
+> - Add the score to score element
 
 ### Wire Frames
+
+**Mobile Wireframe**
+
+![Mobile Wireframe](documentation/images/mobile-wireframe.png)
+
+**Tablet Wireframe**
+
+![Tablet Wireframe](documentation/images/tablet-wireframe.png)
+
+**Desktop Wireframe**
+
+![Desktop Wireframe](documentation/images/desktop-wireframe.png)
 
 ## Project Development
 
@@ -186,17 +177,53 @@ We chose to use Google meets to conistently check in with eachother throughout t
 
 ## Project Deployment
 
-To deploy our tetris game we used GitHub pages which is a free platform to host webpages. We deployed as early as possible and we first published when we had our MVP (minimum viable product).
+This [GitHub](https://github.com/) project was created using the [Code Institute Template](https://github.com/Code-Institute-Org/ci-full-template) ensuring all necessary dependencies were included when opening within the designated workspace on the [Gitopod IDE](https://www.gitpod.io/).
+
+Setup a repo using this method and template:
+1. Login to your GitHub profile.
+2. Navigate to the Code Institute Full Template
+3. Click the dropdown for 'Use this template' and select "Create a new repository"
+4. Generate the necessary name and description for your repo and click 'Create repository from template'
+5. Navigate to the new repo and click the green 'Open' button with the Gitpod logo<br>
+**IMPORTANT - This button should only be clicked once to generate the new IDE workspace**
+6. You can now work on your repository within the Code Institute Gitpod IDE workspace
+
+Once the project repo is created, an early deployment for the live project should performed.<br>
+This allows for early and continuous testing using a variety of devices, as well as the Dev Tools available within browsers.
+
+Additional information on the deployment process can be found on the official [GitHub Docs](https://docs.github.com/en/pages/quickstart)
 
 ## Testing
 
-#### Validation
+### Validation
 
-#### Lighthouse test
+#### CSS
 
-#### Responsiveness Test
+![CSS Validation](documentation/images/css-validation.png)
 
-#### Manual Tests
+#### HTML
+
+![HTML Validation](documentation/images/html-validation.png)
+
+#### JS
+
+![JS Validation](documentation/images/js-validation.png)
+
+#### WAVE
+
+![WAVE Validation](documentation/images/wave-validation.png)
+
+### Lighthouse test
+
+A Lighthouse audit was conducted using ChromeDevtools.
+
+![Mobile Lighthouse](documentation/images/lighthouse-mobile.png)
+
+![Desktop Lighthouse](documentation/images/lighthouse-desktop.png)
+
+### Responsiveness Test
+
+### Manual Tests
 
 ## Impact of AI
 
