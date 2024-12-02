@@ -223,6 +223,8 @@ A Lighthouse audit was conducted using ChromeDevtools.
 
 ### Responsiveness Test
 
+![Responsiveness Test](documentation/images/tetrisAmIresponsive.png)
+
 ### Manual Tests
 
 ## Impact of AI
