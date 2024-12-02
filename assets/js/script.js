@@ -13,7 +13,7 @@ for (let i = 0; i < 200; i++) {
 //Variables
 let run;
 let timer = 1000;
-const multiplier = 0.96;
+const multiplier = 0.99;
 const width = 10; // Number of columns in the grid
 const height = 20; // Number of rows in the grid
 let squares = [];
@@ -352,6 +352,7 @@ function clearRow() {
                 squares[index].classList.remove('taken')
                 squares[index].classList.remove('tetromino')
                 squares[index].style.backgroundColor = ''
+                decreaseTimer();
             })
             const squaresRemoved = squares.splice(i, width)
             squares = squaresRemoved.concat(squares)
@@ -379,7 +380,7 @@ function checkHighScore() {
 
 
 /**
- * Decrease the timer by 4%. Time is rounded to the nearest whole number.
+ * Decrease the timer by 1%. Time is rounded to the nearest whole number.
  * Time is in milliseconds.
  */
 function decreaseTimer() {
@@ -465,9 +466,11 @@ function runGame() {
             if (checkGameOver()) {
                 run = endGame();
             } else {
+                clearTimeout(gameLoopTimeout);
                 gameLoopTimeout = setTimeout(runGame, timer);
             }
         } else {
+            clearTimeout(gameLoopTimeout);
             gameLoopTimeout = setTimeout(runGame, timer);
         }
     } else if (run === false) {
