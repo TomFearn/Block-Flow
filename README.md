@@ -1,6 +1,6 @@
 # Tetris Hackathon Project
 
-#### Try it out here: 
+#### Try it out here: [Classic Tetris](https://tomfearn.github.io/Classic-Tetris/)
 
 #### Team members: [<ins>_Tom Fearn_</ins>](https://github.com/TomFearn)  [<ins>_Jude Woolls_</ins>](https://github.com/judewoolls)  [<ins>_Alex Rodrigues_</ins>](https://github.com/A-SousaRodrigues)
 
@@ -222,6 +222,8 @@ A Lighthouse audit was conducted using ChromeDevtools.
 ![Desktop Lighthouse](documentation/images/lighthouse-desktop.png)
 
 ### Responsiveness Test
+
+![Responsiveness Test](documentation/images/tetrisAmIresponsive.png)
 
 ### Manual Tests
 
