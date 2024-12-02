@@ -163,12 +163,6 @@ Tetris is a classic arcade game where the player is given randomly selected bloc
 
 We chose to use Google meets to conistently check in with eachother throughout the day. We would allocate and decide what parts of the project we should tackle next. We would also make use of sharing the screen with each other when we needed to talk through an issue. This meant that all team members were able to work together and avoid conflicts.  
 
-
-### UX
-**Final Design**
-![Final Design](documentation/images/webpage.png)
--We believe that we have achieved the minimalistic and retro design that we were aiming for. 
-
 >### Key Successes
 >
 >We mostly avoided merge conflicts as we set up our project together in a clear structure and by using communication and regularly pulling from the updated main branch to be adding our code to the most up to date version.
@@ -180,6 +174,11 @@ We chose to use Google meets to conistently check in with eachother throughout t
 >#### Minor issues
 >- We had used different variable names
 
+
+### UX
+**Final Design**
+![Final Design](documentation/images/webpage.png)
+-We believe that we have achieved the minimalistic and retro design that we were aiming for. 
 
 ## Project Deployment
 
