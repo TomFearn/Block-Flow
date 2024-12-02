@@ -33,14 +33,14 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('play').addEventListener('click', () => {
         reset = true;
         restart();
-        document.getElementById('play').classList.add('hidden')
+        document.getElementById('play').classList.add('hidden');
     });
     document.getElementById('resetButton').addEventListener('click', () => {
         reset = true;
         restart();
     });
     window.addEventListener("touchstart", touchHandler, false); //for mobile controls
-})
+});
 
 /**
 
@@ -186,8 +186,8 @@ var rootStyles = getComputedStyle(root);
 var bgRed = rootStyles.getPropertyValue('--bg-basic');
 
 function changeBackground(){
-    console.log(currentColor)
-    pageColor=currentColor
+    console.log(currentColor);
+    pageColor=currentColor;
     if (pageColor === 'red'){
         root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(100% 0% 0%) 0%, rgb(77.248% 0% 0%) 6.25%, rgb(58.618% 0% 0%) 12.5%, rgb(43.581% 0% 0%) 18.75%, rgb(31.641% 0% 0%) 25%, rgb(22.34% 0% 0%) 31.25%, rgb(15.259% 0% 0%) 37.5%, rgb(10.011% 0% 0%) 43.75%, rgb(6.25% 0% 0%) 50%, rgb(3.664% 0% 0%) 56.25%, rgb(1.978% 0% 0%) 62.5%, rgb(0.954% 0% 0%) 68.75%, rgb(0.391% 0% 0%) 75%, rgb(0.124% 0% 0%) 81.25%, rgb(0.024% 0% 0%) 87.5%, rgb(0.002% 0% 0%) 93.75%, rgb(0% 0% 0%) 100% )');
     } else if(pageColor === 'orange'){
@@ -217,7 +217,7 @@ function drawBlock() {
             }
         });
     });
-    changeBackground()
+    changeBackground();
 }
 
 /** 
@@ -356,27 +356,27 @@ function touchHandler(event){
     if(event.touches.length > 1){
         //the event is multi-touch
         //you can then prevent the behavior
-        event.preventDefault()
-    }
+        event.preventDefault();
+    };
 }
 
 
 function clearRow() {
     for (let i = 0; i < 199; i += width) {
-        const row = [i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9]
+        const row = [i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9];
 
         if (row.every(index => squares[index].classList.contains('taken'))) {
-            playerScore += 1
-            displayScore()
+            playerScore += 1;
+            displayScore();
             row.forEach(index => {
-                squares[index].classList.remove('taken')
-                squares[index].classList.remove('tetromino')
-                squares[index].style.backgroundColor = ''
+                squares[index].classList.remove('taken');
+                squares[index].classList.remove('tetromino');
+                squares[index].style.backgroundColor = '';
                 decreaseTimer();
-            })
-            const squaresRemoved = squares.splice(i, width)
-            squares = squaresRemoved.concat(squares)
-            squares.forEach(cell => grid.appendChild(cell))
+            });
+            const squaresRemoved = squares.splice(i, width);
+            squares = squaresRemoved.concat(squares);
+            squares.forEach(cell => grid.appendChild(cell));
         }
     }
 }
@@ -385,14 +385,14 @@ function clearRow() {
  * displays the player score
  */
 function displayScore() {
-    document.querySelector(".player-score").textContent = playerScore
-    checkHighScore()
-    document.querySelector(".high-score").textContent = highScore
+    document.querySelector(".player-score").textContent = playerScore;
+    checkHighScore();
+    document.querySelector(".high-score").textContent = highScore;
 }
 
 function checkHighScore() {
     if (playerScore > highScore) {
-        highScore = playerScore
+        highScore = playerScore;
     } else {
         return;
     }
