@@ -267,9 +267,10 @@ Our project in it's current form is a working minimum viable product and there a
 - Add music and sound effects
 
 
-### Bug fixes
+### Future Bug fixes
 - Additional styling to the bottom of the grid to remove some grey space.
 - Fix the rotate function as currently in some cases a bug can occur when rotating shapes at the edge of the grid.
+- Fix poor performance on Firefox
 
 
 ## Sources
