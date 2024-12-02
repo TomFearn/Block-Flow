@@ -184,7 +184,7 @@ var rootStyles = getComputedStyle(root);
 var bgRed = rootStyles.getPropertyValue('--bg-basic');
 
 function changeBackground(){
-    console.log(currentColor);
+    // console.log(currentColor);
     pageColor=currentColor;
     if (pageColor === 'red'){
         root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(100% 0% 0%) 0%, rgb(77.248% 0% 0%) 6.25%, rgb(58.618% 0% 0%) 12.5%, rgb(43.581% 0% 0%) 18.75%, rgb(31.641% 0% 0%) 25%, rgb(22.34% 0% 0%) 31.25%, rgb(15.259% 0% 0%) 37.5%, rgb(10.011% 0% 0%) 43.75%, rgb(6.25% 0% 0%) 50%, rgb(3.664% 0% 0%) 56.25%, rgb(1.978% 0% 0%) 62.5%, rgb(0.954% 0% 0%) 68.75%, rgb(0.391% 0% 0%) 75%, rgb(0.124% 0% 0%) 81.25%, rgb(0.024% 0% 0%) 87.5%, rgb(0.002% 0% 0%) 93.75%, rgb(0% 0% 0%) 100% )');
@@ -278,11 +278,11 @@ function moveRight() {
  * Rotates the Tetromino 90 degrees clockwise.
  */
 function rotate(matrix = current) {
-    console.log("Rotating block...");
+    // console.log("Rotating block...");
     undrawBlock();
 
     const rotatedMatrix = current[0].map((_, colIndex) => current.map(row => row[colIndex])).map(row => row.reverse());
-    console.log("Rotated Matrix:", rotatedMatrix);
+    // console.log("Rotated Matrix:", rotatedMatrix);
 
     const originalPosition = currentPosition;
     current = rotatedMatrix;
@@ -304,7 +304,7 @@ function rotate(matrix = current) {
     }
 
     drawBlock();
-    console.log("Block rotated successfully.");
+    // console.log("Block rotated successfully.");
 }
 
 
@@ -467,7 +467,7 @@ console.log(run);
  * The main game loop function. Uses a setTimeout to call itself every tick.
  */
 function runGame() {
-    console.log('start of run game: ' + run);
+    // console.log('start of run game: ' + run);
     if (tickCounter === 0) {
         run = true;
         tickCounter++;
@@ -475,7 +475,7 @@ function runGame() {
         tickCounter++;
     }
 
-    console.log('running');
+    // console.log('running');
     if (run === true) {
         console.log('should move down' + tickCounter);
         moveDown();
@@ -504,6 +504,6 @@ function runGame() {
         return;
     }
 
-    console.log('end of run game: ' + run);
+    // console.log('end of run game: ' + run);
 }
 
