@@ -81,6 +81,13 @@ function restart() {
     reset = false; // Reset the reset flag
     clearTimeout(gameLoopTimeout); // Clear any existing timeouts
     gameLoopTimeout = setTimeout(runGame, 1000); // Start the game loop after a short delay
+
+    // Hide the game over message if it is currently visible
+    let gameOver = document.getElementById('gameOverMessage');
+    if (gameOver.classList.contains('gameover-on')) {
+        gameOver.classList.add('gameover-off');
+        gameOver.classList.remove('gameover-on');
+    }
 }
 
 
