@@ -203,6 +203,12 @@ body{
     }
 
     #scoreboard{
+        min-width: 240px;
+    }
+}
+
+@media screen and (min-width: 960px) {
+    #scoreboard{
         padding-bottom: 200px;
     }
 }
