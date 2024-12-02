@@ -97,8 +97,8 @@ body{
 
 /* gameboard styles */
 #gameBoard {
-    width: calc(10 * 0.035 * 100vh + 22px);
-    height: calc(21 * 0.035 * 100vh + 22px);
+    width: calc(10 * (0.035 * 100vh) + 22px);
+    height: calc(21 * (0.035 * 100vh) + 20px);
     display: grid;
     grid-template-columns: repeat(10, calc(0.035 * 100vh));
     grid-template-rows: repeat(21, calc(0.035 * 100vh));
