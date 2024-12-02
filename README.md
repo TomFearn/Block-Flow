@@ -144,6 +144,18 @@ Tetris is a classic arcade game where the player is given randomly selected bloc
 
 ### Wire Frames
 
+**Mobile Wireframe**
+
+![Mobile Wireframe](documentation/images/mobile-wireframe.png)
+
+**Tablet Wireframe**
+
+![Tablet Wireframe](documentation/images/tablet-wireframe.png)
+
+**Desktop Wireframe**
+
+![Desktop Wireframe](documentation/images/desktop-wireframe.png)
+
 ## Project Development
 
 ### Our Approach
