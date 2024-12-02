@@ -65,7 +65,7 @@ function startGame() {
     document.getElementById('left').addEventListener('click', moveLeft);
     document.getElementById('rotate').addEventListener('click', rotate);
     document.getElementById('right').addEventListener('click', moveRight);
-
+    document.getElementById('down').addEventListener('click', moveDown);
 }
 
 function endGame(){
@@ -73,6 +73,7 @@ function endGame(){
     document.getElementById('rotate').removeEventListener('click', rotate);
     document.getElementById('left').removeEventListener('click', moveLeft);
     document.getElementById('right').removeEventListener('click', moveRight);
+    document.getElementById('down').removeEventListener('click', moveDown);
 }
 
 function restart() {
@@ -91,6 +92,9 @@ function restart() {
 
     document.getElementById('right').removeEventListener('click', moveRight);
     document.getElementById('right').addEventListener('click', moveRight);
+
+    document.getElementById('down').addEventListener('click', moveDown);
+    document.getElementById('down').removeEventListener('click', moveDown);
 
     reset = false; // Reset the reset flag
     clearTimeout(gameLoopTimeout); // Clear any existing timeouts
