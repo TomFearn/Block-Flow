@@ -173,6 +173,7 @@ body{
 /* reset button */
 .reset-button{
     background-color: red;
+    z-index: 5;
 }
 
 /* game buttons */
