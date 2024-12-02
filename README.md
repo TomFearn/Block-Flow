@@ -177,17 +177,53 @@ We chose to use Google meets to conistently check in with eachother throughout t
 
 ## Project Deployment
 
-To deploy our tetris game we used GitHub pages which is a free platform to host webpages. We deployed as early as possible and we first published when we had our MVP (minimum viable product).
+This [GitHub](https://github.com/) project was created using the [Code Institute Template](https://github.com/Code-Institute-Org/ci-full-template) ensuring all necessary dependencies were included when opening within the designated workspace on the [Gitopod IDE](https://www.gitpod.io/).
+
+Setup a repo using this method and template:
+1. Login to your GitHub profile.
+2. Navigate to the Code Institute Full Template
+3. Click the dropdown for 'Use this template' and select "Create a new repository"
+4. Generate the necessary name and description for your repo and click 'Create repository from template'
+5. Navigate to the new repo and click the green 'Open' button with the Gitpod logo<br>
+**IMPORTANT - This button should only be clicked once to generate the new IDE workspace**
+6. You can now work on your repository within the Code Institute Gitpod IDE workspace
+
+Once the project repo is created, an early deployment for the live project should performed.<br>
+This allows for early and continuous testing using a variety of devices, as well as the Dev Tools available within browsers.
+
+Additional information on the deployment process can be found on the official [GitHub Docs](https://docs.github.com/en/pages/quickstart)
 
 ## Testing
 
-#### Validation
+### Validation
 
-#### Lighthouse test
+#### CSS
 
-#### Responsiveness Test
+![CSS Validation](documentation/images/css-validation.png)
 
-#### Manual Tests
+#### HTML
+
+![HTML Validation](documentation/images/html-validation.png)
+
+#### JS
+
+![JS Validation](documentation/images/js-validation.png)
+
+#### WAVE
+
+![WAVE Validation](documentation/images/wave-validation.png)
+
+### Lighthouse test
+
+A Lighthouse audit was conducted using ChromeDevtools.
+
+![Mobile Lighthouse](documentation/images/lighthouse-mobile.png)
+
+![Desktop Lighthouse](documentation/images/lighthouse-desktop.png)
+
+### Responsiveness Test
+
+### Manual Tests
 
 ## Impact of AI
 
