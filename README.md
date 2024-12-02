@@ -265,11 +265,13 @@ Our project in it's current form is a working minimum viable product and there a
 - Add a score mulitplier for when multiple lines are cleared at once
 - Create a larger leaderboard that uses player names and scores.
 - Add music and sound effects
+- Add high contrast mode for people with visual impairments.
 
 
-### Bug fixes
+### Future Bug fixes
 - Additional styling to the bottom of the grid to remove some grey space.
 - Fix the rotate function as currently in some cases a bug can occur when rotating shapes at the edge of the grid.
+- Fix poor performance on Firefox.
 
 
 ## Sources
