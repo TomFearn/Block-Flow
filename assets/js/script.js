@@ -24,6 +24,8 @@ let highScore = 0;
 let tickCounter = 0;
 let reset = false;
 let gameLoopTimeout;
+
+
 //Functions
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -59,6 +61,13 @@ function startGame() {
     document.getElementById('rotate').addEventListener('click', rotate);
     document.getElementById('right').addEventListener('click', moveRight);
 
+}
+
+function endGame(){
+    document.removeEventListener('keydown', control);
+    document.getElementById('rotate').removeEventListener('click', rotate);
+    document.getElementById('left').removeEventListener('click', moveLeft);
+    document.getElementById('right').removeEventListener('click', moveRight);
 }
 
 function restart() {
@@ -161,28 +170,28 @@ let random = Math.floor(Math.random() * tetrominoes.length);
 let current = tetrominoes[random].shape;
 let currentColor = tetrominoes[random].color;
 
-let pageColor = currentColor
+let pageColor = currentColor;
 var root = document.querySelector(':root');
 var rootStyles = getComputedStyle(root);
-var bgRed = rootStyles.getPropertyValue('--bg-basic')
+var bgRed = rootStyles.getPropertyValue('--bg-basic');
 
 function changeBackground(){
     console.log(currentColor)
     pageColor=currentColor
     if (pageColor === 'red'){
-        root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(100% 0% 0%) 0%, rgb(77.248% 0% 0%) 6.25%, rgb(58.618% 0% 0%) 12.5%, rgb(43.581% 0% 0%) 18.75%, rgb(31.641% 0% 0%) 25%, rgb(22.34% 0% 0%) 31.25%, rgb(15.259% 0% 0%) 37.5%, rgb(10.011% 0% 0%) 43.75%, rgb(6.25% 0% 0%) 50%, rgb(3.664% 0% 0%) 56.25%, rgb(1.978% 0% 0%) 62.5%, rgb(0.954% 0% 0%) 68.75%, rgb(0.391% 0% 0%) 75%, rgb(0.124% 0% 0%) 81.25%, rgb(0.024% 0% 0%) 87.5%, rgb(0.002% 0% 0%) 93.75%, rgb(0% 0% 0%) 100% )')
+        root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(100% 0% 0%) 0%, rgb(77.248% 0% 0%) 6.25%, rgb(58.618% 0% 0%) 12.5%, rgb(43.581% 0% 0%) 18.75%, rgb(31.641% 0% 0%) 25%, rgb(22.34% 0% 0%) 31.25%, rgb(15.259% 0% 0%) 37.5%, rgb(10.011% 0% 0%) 43.75%, rgb(6.25% 0% 0%) 50%, rgb(3.664% 0% 0%) 56.25%, rgb(1.978% 0% 0%) 62.5%, rgb(0.954% 0% 0%) 68.75%, rgb(0.391% 0% 0%) 75%, rgb(0.124% 0% 0%) 81.25%, rgb(0.024% 0% 0%) 87.5%, rgb(0.002% 0% 0%) 93.75%, rgb(0% 0% 0%) 100% )');
     } else if(pageColor === 'orange'){
-        root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(100% 64.706% 0%) 0%, rgb(77.248% 49.984% 0%) 6.25%, rgb(58.618% 37.929% 0%) 12.5%, rgb(43.581% 28.199% 0%) 18.75%, rgb(31.641% 20.473% 0%) 25%, rgb(22.34% 14.456% 0%) 31.25%, rgb(15.259% 9.873% 0%) 37.5%, rgb(10.011% 6.478% 0%) 43.75%, rgb(6.25% 4.044% 0%) 50%, rgb(3.664% 2.371% 0%) 56.25%, rgb(1.978% 1.28% 0%) 62.5%, rgb(0.954% 0.617% 0%) 68.75%, rgb(0.391% 0.253% 0%) 75%, rgb(0.124% 0.08% 0%) 81.25%, rgb(0.024% 0.016% 0%) 87.5%, rgb(0.002% 0.001% 0%) 93.75%, rgb(0% 0% 0%) 100% )')
+        root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(100% 64.706% 0%) 0%, rgb(77.248% 49.984% 0%) 6.25%, rgb(58.618% 37.929% 0%) 12.5%, rgb(43.581% 28.199% 0%) 18.75%, rgb(31.641% 20.473% 0%) 25%, rgb(22.34% 14.456% 0%) 31.25%, rgb(15.259% 9.873% 0%) 37.5%, rgb(10.011% 6.478% 0%) 43.75%, rgb(6.25% 4.044% 0%) 50%, rgb(3.664% 2.371% 0%) 56.25%, rgb(1.978% 1.28% 0%) 62.5%, rgb(0.954% 0.617% 0%) 68.75%, rgb(0.391% 0.253% 0%) 75%, rgb(0.124% 0.08% 0%) 81.25%, rgb(0.024% 0.016% 0%) 87.5%, rgb(0.002% 0.001% 0%) 93.75%, rgb(0% 0% 0%) 100% )');
     } else if(pageColor === 'yellow'){
-        root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(100% 100% 0%) 0%, rgb(77.248% 77.248% 0%) 6.25%, rgb(58.618% 58.618% 0%) 12.5%, rgb(43.581% 43.581% 0%) 18.75%, rgb(31.641% 31.641% 0%) 25%, rgb(22.34% 22.34% 0%) 31.25%, rgb(15.259% 15.259% 0%) 37.5%, rgb(10.011% 10.011% 0%) 43.75%, rgb(6.25% 6.25% 0%) 50%, rgb(3.664% 3.664% 0%) 56.25%, rgb(1.978% 1.978% 0%) 62.5%, rgb(0.954% 0.954% 0%) 68.75%, rgb(0.391% 0.391% 0%) 75%, rgb(0.124% 0.124% 0%) 81.25%, rgb(0.024% 0.024% 0%) 87.5%, rgb(0.002% 0.002% 0%) 93.75%, rgb(0% 0% 0%) 100% )')
+        root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(100% 100% 0%) 0%, rgb(77.248% 77.248% 0%) 6.25%, rgb(58.618% 58.618% 0%) 12.5%, rgb(43.581% 43.581% 0%) 18.75%, rgb(31.641% 31.641% 0%) 25%, rgb(22.34% 22.34% 0%) 31.25%, rgb(15.259% 15.259% 0%) 37.5%, rgb(10.011% 10.011% 0%) 43.75%, rgb(6.25% 6.25% 0%) 50%, rgb(3.664% 3.664% 0%) 56.25%, rgb(1.978% 1.978% 0%) 62.5%, rgb(0.954% 0.954% 0%) 68.75%, rgb(0.391% 0.391% 0%) 75%, rgb(0.124% 0.124% 0%) 81.25%, rgb(0.024% 0.024% 0%) 87.5%, rgb(0.002% 0.002% 0%) 93.75%, rgb(0% 0% 0%) 100% )');
     } else if(pageColor === 'green'){
-        root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(0% 50.196% 0%) 0%, rgb(0% 38.775% 0%) 6.25%, rgb(0% 29.424% 0%) 12.5%, rgb(0% 21.876% 0%) 18.75%, rgb(0% 15.882% 0%) 25%, rgb(0% 11.214% 0%) 31.25%, rgb(0% 7.659% 0%) 37.5%, rgb(0% 5.025% 0%) 43.75%, rgb(0% 3.137% 0%) 50%, rgb(0% 1.839% 0%) 56.25%, rgb(0% 0.993% 0%) 62.5%, rgb(0% 0.479% 0%) 68.75%, rgb(0% 0.196% 0%) 75%, rgb(0% 0.062% 0%) 81.25%, rgb(0% 0.012% 0%) 87.5%, rgb(0% 0.001% 0%) 93.75%, rgb(0% 0% 0%) 100% )')
+        root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(0% 50.196% 0%) 0%, rgb(0% 38.775% 0%) 6.25%, rgb(0% 29.424% 0%) 12.5%, rgb(0% 21.876% 0%) 18.75%, rgb(0% 15.882% 0%) 25%, rgb(0% 11.214% 0%) 31.25%, rgb(0% 7.659% 0%) 37.5%, rgb(0% 5.025% 0%) 43.75%, rgb(0% 3.137% 0%) 50%, rgb(0% 1.839% 0%) 56.25%, rgb(0% 0.993% 0%) 62.5%, rgb(0% 0.479% 0%) 68.75%, rgb(0% 0.196% 0%) 75%, rgb(0% 0.062% 0%) 81.25%, rgb(0% 0.012% 0%) 87.5%, rgb(0% 0.001% 0%) 93.75%, rgb(0% 0% 0%) 100% )');
     } else if(pageColor === 'cyan'){
-        root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(0% 100% 100%) 0%, rgb(0% 77.248% 77.248%) 6.25%, rgb(0% 58.618% 58.618%) 12.5%, rgb(0% 43.581% 43.581%) 18.75%, rgb(0% 31.641% 31.641%) 25%, rgb(0% 22.34% 22.34%) 31.25%, rgb(0% 15.259% 15.259%) 37.5%, rgb(0% 10.011% 10.011%) 43.75%, rgb(0% 6.25% 6.25%) 50%, rgb(0% 3.664% 3.664%) 56.25%, rgb(0% 1.978% 1.978%) 62.5%, rgb(0% 0.954% 0.954%) 68.75%, rgb(0% 0.391% 0.391%) 75%, rgb(0% 0.124% 0.124%) 81.25%, rgb(0% 0.024% 0.024%) 87.5%, rgb(0% 0.002% 0.002%) 93.75%, rgb(0% 0% 0%) 100% )')
+        root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(0% 100% 100%) 0%, rgb(0% 77.248% 77.248%) 6.25%, rgb(0% 58.618% 58.618%) 12.5%, rgb(0% 43.581% 43.581%) 18.75%, rgb(0% 31.641% 31.641%) 25%, rgb(0% 22.34% 22.34%) 31.25%, rgb(0% 15.259% 15.259%) 37.5%, rgb(0% 10.011% 10.011%) 43.75%, rgb(0% 6.25% 6.25%) 50%, rgb(0% 3.664% 3.664%) 56.25%, rgb(0% 1.978% 1.978%) 62.5%, rgb(0% 0.954% 0.954%) 68.75%, rgb(0% 0.391% 0.391%) 75%, rgb(0% 0.124% 0.124%) 81.25%, rgb(0% 0.024% 0.024%) 87.5%, rgb(0% 0.002% 0.002%) 93.75%, rgb(0% 0% 0%) 100% )');
     } else if(pageColor === 'blue'){
-        root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(0% 0% 100%) 0%, rgb(0% 0% 77.248%) 6.25%, rgb(0% 0% 58.618%) 12.5%, rgb(0% 0% 43.581%) 18.75%, rgb(0% 0% 31.641%) 25%, rgb(0% 0% 22.34%) 31.25%, rgb(0% 0% 15.259%) 37.5%, rgb(0% 0% 10.011%) 43.75%, rgb(0% 0% 6.25%) 50%, rgb(0% 0% 3.664%) 56.25%, rgb(0% 0% 1.978%) 62.5%, rgb(0% 0% 0.954%) 68.75%, rgb(0% 0% 0.391%) 75%, rgb(0% 0% 0.124%) 81.25%, rgb(0% 0% 0.024%) 87.5%, rgb(0% 0% 0.002%) 93.75%, rgb(0% 0% 0%) 100% )')
+        root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(0% 0% 100%) 0%, rgb(0% 0% 77.248%) 6.25%, rgb(0% 0% 58.618%) 12.5%, rgb(0% 0% 43.581%) 18.75%, rgb(0% 0% 31.641%) 25%, rgb(0% 0% 22.34%) 31.25%, rgb(0% 0% 15.259%) 37.5%, rgb(0% 0% 10.011%) 43.75%, rgb(0% 0% 6.25%) 50%, rgb(0% 0% 3.664%) 56.25%, rgb(0% 0% 1.978%) 62.5%, rgb(0% 0% 0.954%) 68.75%, rgb(0% 0% 0.391%) 75%, rgb(0% 0% 0.124%) 81.25%, rgb(0% 0% 0.024%) 87.5%, rgb(0% 0% 0.002%) 93.75%, rgb(0% 0% 0%) 100% )');
     } else if(pageColor === 'purple'){
-        root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(50.196% 0% 50.196%) 0%, rgb(47.059% 0% 47.059%) 6.25%, rgb(43.922% 0% 43.922%) 12.5%, rgb(40.784% 0% 40.784%) 18.75%, rgb(37.647% 0% 37.647%) 25%, rgb(34.51% 0% 34.51%) 31.25%, rgb(31.373% 0% 31.373%) 37.5%, rgb(28.235% 0% 28.235%) 43.75%, rgb(25.098% 0% 25.098%) 50%, rgb(21.961% 0% 21.961%) 56.25%, rgb(18.824% 0% 18.824%) 62.5%, rgb(15.686% 0% 15.686%) 68.75%, rgb(12.549% 0% 12.549%) 75%, rgb(9.412% 0% 9.412%) 81.25%, rgb(6.275% 0% 6.275%) 87.5%, rgb(3.137% 0% 3.137%) 93.75%, rgb(0% 0% 0%) 100% )')
+        root.style.setProperty('--bg-basic', 'linear-gradient(180deg, rgb(50.196% 0% 50.196%) 0%, rgb(47.059% 0% 47.059%) 6.25%, rgb(43.922% 0% 43.922%) 12.5%, rgb(40.784% 0% 40.784%) 18.75%, rgb(37.647% 0% 37.647%) 25%, rgb(34.51% 0% 34.51%) 31.25%, rgb(31.373% 0% 31.373%) 37.5%, rgb(28.235% 0% 28.235%) 43.75%, rgb(25.098% 0% 25.098%) 50%, rgb(21.961% 0% 21.961%) 56.25%, rgb(18.824% 0% 18.824%) 62.5%, rgb(15.686% 0% 15.686%) 68.75%, rgb(12.549% 0% 12.549%) 75%, rgb(9.412% 0% 9.412%) 81.25%, rgb(6.275% 0% 6.275%) 87.5%, rgb(3.137% 0% 3.137%) 93.75%, rgb(0% 0% 0%) 100% )');
     }
 }
 
@@ -463,6 +472,7 @@ function runGame() {
         }
     } else if (run === false) {
         toggleGameOverMessage();
+        endGame();
         console.log('return run' + run);
         return;
     }
