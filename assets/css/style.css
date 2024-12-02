@@ -59,7 +59,6 @@ body{
 #navbar{
     background-color: black;
     padding: 20px;
-    box-shadow: 10px;
 }
 
 #title-box{
@@ -179,6 +178,7 @@ body{
 /* game buttons */
 .game-button{
     background-color: darkgray;
+    z-index: 5;
 }
 
 
