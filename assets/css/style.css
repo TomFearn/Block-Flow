@@ -10,7 +10,7 @@
 
 /* general styles */
 body {
-    min-height: 120vh;
+    min-height: 100vh;
     font-family: 'VT323', monospace;
 }
 
@@ -96,11 +96,11 @@ body{
 
 /* gameboard styles */
 #gameBoard {
-    width: 322px;
-    height: 642px;
+    width: calc(10 * 0.035 * 100vh + 22px);
+    height: calc(21 * 0.035 * 100vh + 22px);
     display: grid;
-    grid-template-columns: repeat(10, 30px);
-    grid-template-rows: repeat(21, 30px);
+    grid-template-columns: repeat(10, calc(0.035 * 100vh));
+    grid-template-rows: repeat(21, calc(0.035 * 100vh));
     grid-gap: 2px;
     background-color: rgb(34, 34, 34);
     border: 2px solid rgb(34, 34, 34);
