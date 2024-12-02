@@ -94,9 +94,9 @@ function restart() {
     document.getElementById('right').removeEventListener('click', moveRight);
     document.getElementById('right').addEventListener('click', moveRight);
 
-    document.getElementById('down').addEventListener('click', moveDown);
     document.getElementById('down').removeEventListener('click', moveDown);
-
+    document.getElementById('down').addEventListener('click', moveDown);
+    
     reset = false; // Reset the reset flag
     clearTimeout(gameLoopTimeout); // Clear any existing timeouts
     gameLoopTimeout = setTimeout(runGame, 1000); // Start the game loop after a short delay
