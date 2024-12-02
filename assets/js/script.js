@@ -30,6 +30,11 @@ let gameLoopTimeout;
 
 document.addEventListener('DOMContentLoaded', function () {
     //event listener for start button. runGame called upn click
+    document.getElementById('play').addEventListener('click', () => {
+        reset = true;
+        restart();
+        document.getElementById('play').classList.add('hidden')
+    });
     document.getElementById('resetButton').addEventListener('click', () => {
         reset = true;
         restart();
