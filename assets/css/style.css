@@ -1,7 +1,12 @@
 
+variables
+:root {
+    --bg-basic: black;
+}
+
+
 /* general styles */
 body {
-    background-color: black;
     min-height: 120vh;
 }
 
@@ -12,6 +17,12 @@ body {
 .hidden{
     visibility: hidden;
     position: absolute;
+}
+
+
+/* background styles */
+body{
+    background: var(--bg-basic);
 }
 
 
@@ -40,6 +51,7 @@ body {
 #navbar{
     background-color: grey;
     padding: 20px;
+    box-shadow: 10px;
 }
 
 #title-box{
