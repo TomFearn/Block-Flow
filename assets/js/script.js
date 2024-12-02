@@ -384,6 +384,16 @@ function endGame() {
     console.log("Ending game...");
     run = false;
     toggleGameOverMessage();
+
+    // Remove keyboard event listener
+    document.removeEventListener('keydown', control);
+
+    // Remove on-screen button event listeners
+    document.getElementById('left').removeEventListener('click', moveLeft);
+    document.getElementById('rotate').removeEventListener('click', rotate);
+    document.getElementById('right').removeEventListener('click', moveRight);
+    document.getElementById('down').removeEventListener('click', moveDown);
+
     return false;
 }
 
