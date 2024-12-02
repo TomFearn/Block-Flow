@@ -15,10 +15,8 @@ let run;
 let timer = 1000;
 const multiplier = 0.99;
 const width = 10; // Number of columns in the grid
-const height = 20; // Number of rows in the grid
 let squares = [];
 let currentPosition = 4;
-let currentRotation = 0;
 let playerScore = 0;
 let highScore = 0;
 let tickCounter = 0;
@@ -357,7 +355,7 @@ function touchHandler(event){
         //the event is multi-touch
         //you can then prevent the behavior
         event.preventDefault();
-    };
+    }
 }
 
 
