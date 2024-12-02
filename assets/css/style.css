@@ -97,11 +97,11 @@ body{
 
 /* gameboard styles */
 #gameBoard {
-    width: calc(10 * 0.035 * 100vh + 22px);
-    height: calc(21 * 0.035 * 100vh + 22px);
+    width: calc(10 * (0.033 * 100vh) + 22px);
+    height: calc(21 * (0.033 * 100vh) + 20px);
     display: grid;
-    grid-template-columns: repeat(10, calc(0.035 * 100vh));
-    grid-template-rows: repeat(21, calc(0.035 * 100vh));
+    grid-template-columns: repeat(10, calc(0.033 * 100vh));
+    grid-template-rows: repeat(21, calc(0.033 * 100vh));
     grid-gap: 2px;
     background-color: rgb(34, 34, 34);
     border: 2px solid rgb(34, 34, 34);
@@ -122,9 +122,8 @@ body{
     position: absolute;
     font-size: 4rem;
     top: 50vh;
-    background-color: black;
-    opacity: 0.8;
-    max-width: 20%;
+    background-color: rgba(97, 93, 93, 0.6);
+    max-width: 80%;
 }
 
 .gameover-off {
@@ -208,6 +207,10 @@ body{
     #scoreboard{
         min-width: 240px;
     }
+
+    #gameOverMessage{
+        max-width: 40%;
+    }
 }
 
 @media screen and (min-width: 960px) {
@@ -224,5 +227,9 @@ body{
     #instructions-block{
         visibility: visible;
         position: relative;
+    }
+
+    #gameOverMessage{
+        max-width: 20%;
     }
 }
