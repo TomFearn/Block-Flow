@@ -205,17 +205,25 @@ Additional information on the deployment process can be found on the official [G
 
 #### CSS
 
+No errors.
+
 ![CSS Validation](documentation/images/css-validation.png)
 
 #### HTML
+
+No errors.
 
 ![HTML Validation](documentation/images/html-validation.png)
 
 #### JS
 
+No errors but given more time we would like to refactor functions to overcome the following warnings.
+
 ![JS Validation](documentation/images/js-validation.png)
 
 #### WAVE
+
+Some contrast issues, but these have not been changed to maintain cohesive styling with the blocks.
 
 ![WAVE Validation](documentation/images/wave-validation.png)
 
@@ -232,8 +240,6 @@ A Lighthouse audit was conducted using ChromeDevtools.
 ### Responsiveness Test
 
 ![Responsiveness Test](documentation/images/tetrisAmIresponsive.png)
-
-### Manual Tests
 
 ## Impact of AI
 
