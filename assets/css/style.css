@@ -12,6 +12,7 @@
 body {
     min-height: 100vh;
     font-family: 'VT323', monospace;
+    font-size: 1.5rem;
 }
 
 .row{
@@ -117,6 +118,12 @@ body{
 
 
 /* gameover styles */
+#gameOverMessage{
+    position: absolute;
+    font-size: 4rem;
+    top: 50vh;
+}
+
 .gameover-off {
     visibility: hidden;
 }
@@ -129,9 +136,13 @@ body{
 
 
 /* score board styles */
-#score-board{
+#scoreboard{
     color: white;
     padding-right: 20px;
+}
+
+#scoreboard p{
+    padding-right: 5px;
 }
 
 .score{
@@ -191,7 +202,7 @@ body{
         position: absolute;
     }
 
-    #score-board{
+    #scoreboard{
         padding-bottom: 200px;
     }
 }
