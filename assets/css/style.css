@@ -181,7 +181,7 @@ body{
 
 
 /* media queries for adaptive display on larger screen sizes */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 768px) {
     #instructions{
         visibility: visible;
         position: relative;
