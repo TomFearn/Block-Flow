@@ -12,7 +12,7 @@
 4. [Project Deployment](#project-deployment)
 5. [Testing](#testing)
 6. [Impact of AI](#impact-of-ai)
-7. [Future features](#)
+7. [Future features](#future-features)
 8. [Sources](#sources)
 
 
