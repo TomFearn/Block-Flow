@@ -217,9 +217,11 @@ Additional information on the deployment process can be found on the official [G
 
 A Lighthouse audit was conducted using ChromeDevtools.
 
-![Mobile Lighthouse](documentation/images/lighthouse-mobile.png)
+>#### Mobile
+>![Mobile Lighthouse](documentation/images/mobile-lighthouse-test.png)
 
-![Desktop Lighthouse](documentation/images/lighthouse-desktop.png)
+>#### Desktop
+>![Desktop Lighthouse](documentation/images/desktop-lighthouse-test.png)
 
 ### Responsiveness Test
 
